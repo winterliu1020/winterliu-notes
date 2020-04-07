@@ -10,7 +10,8 @@
       "insert-logo",
       "popup",
       "-sharing",
-      "sharing-plus"
+      "sharing-plus",
+      "chapter-fold"
   ],
   "pluginsConfig": {
       "insert-logo": {
