@@ -1,0 +1,581 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Java中HashMap底层原理 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-code/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Compute-Network.html" />
+    
+    
+    <link rel="prev" href="Java.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="Java.html">
+            
+                <a href="Java.html">
+            
+                    
+                    Java
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="Java.html">
+            
+                <a href="Java.html">
+            
+                    
+                    Java 基础
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="Java中HashMap底层原理.html">
+            
+                <a href="Java中HashMap底层原理.html">
+            
+                    
+                    Java中HashMap底层原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="Compute-Network.html">
+            
+                <a href="Compute-Network.html">
+            
+                    
+                    Compute-Network
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Java中HashMap底层原理</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h3 id="1-&#x9996;&#x5148;&#x770B;&#x51E0;&#x4E2A;&#x95EE;&#x9898;">1. &#x9996;&#x5148;&#x770B;&#x51E0;&#x4E2A;&#x95EE;&#x9898;</h3>
+<ul>
+<li>&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x4F1A;&#x4F7F;&#x7528;HashMap?&#x5B83;&#x6709;&#x4EC0;&#x4E48;&#x7279;&#x70B9;&#xFF1F;</li>
+<li>HashMap&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</li>
+<li>HashMap&#x4E2D;put&#x548C;get&#x7684;&#x539F;&#x7406;&#xFF0C;equals()&#x548C;hashCode()&#x51FD;&#x6570;&#x90FD;&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;</li>
+<li>hash&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x8FD9;&#x6837;&#x5B9E;&#x73B0;&#xFF1F;</li>
+<li>&#x5F53;HashMap&#x7684;&#x5927;&#x5C0F;&#x8D85;&#x8FC7;&#x4E86;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;(load factor)&#x5B9A;&#x4E49;&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x600E;&#x4E48;&#x529E;&#xFF1F;</li>
+</ul>
+<p>&#x5F53;&#x6267;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x64CD;&#x4F5C;&#x65F6;&#xFF1A;</p>
+<pre><code>HashMap&lt;String,Integer&gt; map = new HashMap&lt;String,Integer&gt;();
+map.put(&quot;&#x8BED;&#x6587;&quot;,1);
+map.put(&quot;&#x6570;&#x5B66;&quot;,2);
+map.put(&quot;&#x82F1;&#x8BED;&quot;,3);
+map.put(&quot;&#x5386;&#x53F2;&quot;,4);
+map.put(&quot;&#x653F;&#x6CBB;&quot;,5);
+map.put(&quot;&#x5730;&#x7406;&quot;,6);
+map.put(&quot;&#x751F;&#x7269;&quot;,7);
+map.put(&quot;&#x5316;&#x5B66;&quot;,8);
+for(Entry&lt;String, Integer&gt; entry : map.entrySet()){
+    System.out.println(entry.getKet() + &quot;:&quot; + entry.getValue());
+}
+</code></pre><p>&#x6267;&#x884C;&#x7ED3;&#x679C;&#xFF1A;</p>
+<blockquote>
+<p>&#x653F;&#x6CBB;: 5<br>&#x751F;&#x7269;: 7<br>&#x5386;&#x53F2;: 4<br>&#x6570;&#x5B66;: 2<br>&#x5316;&#x5B66;: 8<br>&#x8BED;&#x6587;: 1<br>&#x82F1;&#x8BED;: 3<br>&#x5730;&#x7406;: 6  </p>
+</blockquote>
+<p>&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x662F;&#x6309;&#x7167;&#x5FAA;&#x5E8F;&#x6253;&#x5370;&#x51FA;&#x6765;&#x5462;&#xFF1F;&#x770B;&#x4E0B;&#x9762;&#x8FD9;&#x5F20;&#x56FE;&#x6765;&#x5BF9;HashMap&#x7ED3;&#x6784;&#x6709;&#x4E00;&#x4E2A;&#x611F;&#x6027;&#x8BA4;&#x8BC6;&#xFF1A;</p>
+<p><img src="https://winterliublog.oss-cn-beijing.aliyuncs.com/HashMap/HashMap.png" alt=""></p>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD9;&#x4E9B;entry&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x65E2;&#x4E0D;&#x662F;&#x8FDE;&#x7EED;&#x7684;&#x3001;&#x4E5F;&#x4E0D;&#x662F;&#x6309;&#x7167;put&#x7684;&#x5FAA;&#x5E8F;&#x6392;&#x5217;&#x7684;&#x3002;</p>
+<p>&#x5B98;&#x65B9;&#x6587;&#x6863;&#x63CF;&#x8FF0;HashMap:</p>
+<blockquote>
+<p>Hash table based <strong>implementation of the Map interface</strong> . This implementation provides all of the optional map operations, and permits null values and the null key. (The HashMap class is roughly equivalent to Hashtable, except that it is <strong>unsynchronized and permits nulls</strong>.) This class ++makes no guarantees as to the order of the map++; in particular, it does ++not guarantee that the order will remain constant over time++.</p>
+</blockquote>
+<p>&#x6CE8;&#x610F;&#x70B9;&#xFF1A;&#x57FA;&#x4E8E;Map&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x3001;&#x5141;&#x8BB8;null&#x952E;/&#x503C;&#x3001;&#x975E;&#x540C;&#x6B65;&#x3001;&#x4E0D;&#x4FDD;&#x8BC1;&#x6709;&#x5E8F;(&#x6BD4;&#x5982;&#x63D2;&#x5165;&#x7684;&#x5FAA;&#x5E8F;)&#x3001;&#x4E0D;&#x4FDD;&#x8BC1;&#x5E8F;&#x5217;&#x4E0D;&#x968F;&#x65F6;&#x95F4;&#x53D8;&#x5316;&#x3002;</p>
+<h3 id="2-&#x4E24;&#x4E2A;&#x91CD;&#x8981;&#x53C2;&#x6570;">2. &#x4E24;&#x4E2A;&#x91CD;&#x8981;&#x53C2;&#x6570;</h3>
+<p>HashMap&#x4E2D;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x4E24;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x53C2;&#x6570;&#x662F;&#xFF1A;&#x5BB9;&#x91CF;(Capacity)&#x548C;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;(Load factor)  </p>
+<blockquote>
+<ul>
+<li>Initial capacity The capacity is the number of buckets in the hash table, The initial capacity is simply the capacity at the time the hash table is created.  </li>
+<li>Load factor The load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased. </li>
+</ul>
+</blockquote>
+<p>Capacity&#x5176;&#x5B9E;&#x5C31;&#x662F;buckets&#x7684;&#x6570;&#x76EE;&#xFF0C;Load factor&#x5C31;&#x662F;buckets&#x586B;&#x6EE1;&#x7A0B;&#x5EA6;&#x7684;&#x6700;&#x5927;&#x6BD4;&#x4F8B;&#x3002;&#x5F53;HashMap&#x4E2D;&#x5143;&#x7D20;&#x7684;&#x4E2A;&#x6570;&#x5927;&#x4E8E;capacity*load factor&#x65F6;&#x5C31;&#x9700;&#x8981;&#x8C03;&#x6574;buckets&#x7684;&#x6570;&#x76EE;&#x4E3A;&#x5F53;&#x524D;&#x7684;2&#x500D;&#x3002;  </p>
+<h3 id="3-put&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;">3. put&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;</h3>
+<p>put&#x51FD;&#x6570;&#x7684;&#x5927;&#x81F4;&#x601D;&#x8DEF;&#x662F;&#xFF1A;</p>
+<ol>
+<li>&#x5229;&#x7528;hashCode()&#x51FD;&#x6570;&#x5F97;&#x5230;key&#x7684;hash&#x503C;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x8BA1;&#x7B97;&#x8FD9;&#x4E2A;hash&#x503C;&#x7684;index&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x78B0;&#x649E;&#x5C31;&#x76F4;&#x63A5;&#x653E;&#x5728;bucket&#x4E2D;&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x78B0;&#x649E;&#x4E86;&#x5C31;&#x4EE5;&#x94FE;&#x8868;&#x7684;&#x5F62;&#x5F0F;&#x653E;&#x5728;buckets&#x7684;&#x540E;&#x9762;</li>
+<li>&#x5982;&#x679C;&#x78B0;&#x649E;&#x5BFC;&#x81F4;&#x94FE;&#x8868;&#x8FC7;&#x957F;(&#x5927;&#x4E8E;&#x7B49;&#x4E8E;TREEIFY_THRESHOLD),&#x5C31;&#x628A;&#x94FE;&#x8868;&#x8F6C;&#x6362;&#x6210;&#x7EA2;&#x9ED1;&#x6811;&#xFF1B;</li>
+<li>&#x5982;&#x679C;&#x8282;&#x70B9;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x5C31;&#x66FF;&#x6362;old value(&#x4FDD;&#x8BC1;key&#x7684;&#x552F;&#x4E00;&#x6027;)</li>
+<li>&#x5982;&#x679C;bucket&#x6EE1;&#x4E86;&#xFF0C;&#x5C31;resize.  </li>
+</ol>
+<p>&#x5177;&#x4F53;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>public V put(K key, V value){
+    // &#x5BF9;key&#x7684;hashCode()&#x505A;hash
+    return putVal(hash(key), key, value, false, true);
+}
+
+final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict){
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+    // tab&#x4E3A;&#x7A7A;&#x5219;&#x521B;&#x5EFA;
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    // &#x8BA1;&#x7B97;index&#xFF0C;&#x5E76;&#x5BF9;null&#x505A;&#x5904;&#x7406;
+    if ((p = tab[i = (n -1) &amp; hash]) == null)
+        tab[i] = newNode(hash, key, value, null);
+    else{
+        Node&lt;K,V&gt; e; K k;
+        // &#x8282;&#x70B9;&#x5B58;&#x5728;
+        if (p.hash == hash &amp;&amp; ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            e = p;
+        // &#x8BE5;&#x94FE;&#x4E3A;&#x6811;
+        else if (p instanceof TreeNode)
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+        // &#x8BE5;&#x94FE;&#x4E3A;&#x94FE;&#x8868;
+        else {
+            for (int binCount = 0; ; ++binCount){
+                if ((e = p.next) == null){
+                    p.next = newNode(hash, key, value, null);
+                    if(binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash); // &#x5F53;&#x94FE;&#x8868;&#x957F;&#x5EA6;&#x8D85;&#x8FC7;&#x4E86;&#x4E00;&#x5B9A;&#x503C;&#x65F6;&#x5C06;&#x94FE;&#x8868;&#x8F6C;&#x6210;&#x7EA2;&#x9ED1;&#x6811;
+                    break;
+                }
+                if (e.hash == hash &amp;&amp; ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    break; // &#x8BF4;&#x660E;&#x8282;&#x70B9;&#x5DF2;&#x5B58;&#x5728;
+                p = e;
+            }
+        }
+        // &#x5199;&#x5165;
+        if (e != null){ // &#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x5339;&#x914D;&#x8FD9;&#x4E2A;key&#x7684;&#x503C;
+        V oldValue = e.value;
+        if (!onlyIfAbsent || oldValue == null)
+            e.value = value;
+        afterNodeAccess(e);
+        return oldValue;
+        }
+    }
+    ++modCount;
+    if (++size &gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}
+</code></pre><h3 id="4-get&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;">4. get&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;</h3>
+<ol>
+<li>bucket&#x91CC;&#x9762;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#xFF0C;&#x76F4;&#x63A5;&#x547D;&#x4E2D;</li>
+<li>&#x5982;&#x679C;&#x6709;&#x51B2;&#x7A81;&#xFF0C;&#x5219;&#x901A;&#x8FC7;key.equals(k)&#x53BB;&#x67E5;&#x627E;&#x5BF9;&#x5E94;&#x7684;entry&#xFF0C;&#x5982;&#x679C;&#x4E3A;&#x6811;&#xFF0C;&#x5219;&#x5728;&#x6811;&#x4E2D;&#x901A;&#x8FC7;key.equals(k)&#x67E5;&#x627E;&#xFF0C;O(logn);&#x5982;&#x679C;&#x662F;&#x94FE;&#x8868;&#xFF0C;&#x5219;&#x5728;&#x94FE;&#x8868;&#x4E2D;&#x901A;&#x8FC7;key.equals(k)&#x67E5;&#x627E;&#xFF0C;O(n).  </li>
+</ol>
+<pre><code>public V get(Object key){
+    Node&lt;K,V&gt; e;
+    return (e = getNode(hash(key), key)) == null ? null : e.value;
+}
+
+final Node&lt;K,V&gt; getNode(int hash, Object key){
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;
+    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp; (first = tab[(n - 1) &amp; hash]) != null){
+        // &#x76F4;&#x63A5;&#x547D;&#x4E2D;
+        if (first.hash == hash &amp;&amp; ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
+            return first;
+        // &#x672A;&#x547D;&#x4E2D;
+        if ((e = first.next) != null){
+            // &#x5728;&#x6811;&#x4E2D;get
+            if (first instanceof TreeNode)
+                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
+            // &#x5728;&#x94FE;&#x8868;&#x4E2D;get
+            do {
+                if(e.hash == hash &amp;&amp; ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    return e;
+            } while ((e = e.next) != null);
+        }
+    }
+    return null;
+}
+</code></pre><h3 id="5-hash&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;">5. hash&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;</h3>
+<p>&#x5728;get&#x548C;put&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x8BA1;&#x7B97;&#x4E0B;&#x6807;&#x65F6;&#xFF0C;&#x9996;&#x5148;&#x5BF9;hashCode&#x8FDB;&#x884C;hash&#x64CD;&#x4F5C;&#x83B7;&#x53D6;&#x5230;hash&#x503C;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;hash&#x503C;&#x8FDB;&#x4E00;&#x6B65;&#x8BA1;&#x7B97;&#x4E0B;&#x6807;&#x3002;  </p>
+<p><img src="https://winterliublog.oss-cn-beijing.aliyuncs.com/HashMap/hash-function.png" alt=""></p>
+<pre><code>static final int hash(Object key) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h &gt;&gt;&gt; 16);
+}
+</code></pre><p>&#x8BA1;&#x7B97;hash&#x503C;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#xFF1A;&#x9AD8;16bit&#x4E0D;&#x53D8;&#xFF0C;&#x5E95;16bit&#x548C;&#x9AD8;16bit&#x505A;&#x4E86;&#x4E00;&#x4E2A;&#x5F02;&#x6216;&#x3002;<br>&#x5728;&#x8BBE;&#x8BA1;hash&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x56E0;&#x4E3A;table&#x957F;&#x5EA6;n&#x4E3A;2&#x7684;&#x5E42;&#xFF0C;&#x800C;&#x8BA1;&#x7B97;&#x4E0B;&#x6807;&#x65F6;&#xFF0C;&#x662F;&#x4F7F;&#x7528;&amp;&#x4F4D;&#x64CD;&#x4F5C;(&#x6309;&#x4F4D;&#x4E0E;&#x64CD;&#x4F5C;)&#xFF0C;&#x800C;&#x975E;%&#x6C42;&#x4F59;&#x3002;</p>
+<blockquote>
+<p>(n-1) &amp; hash</p>
+</blockquote>
+<p>&#x8BBE;&#x8BA1;&#x8005;&#x8BA4;&#x4E3A;&#x8FD9;&#x65B9;&#x6CD5;&#x5F88;&#x5BB9;&#x6613;&#x53D1;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x6BD4;&#x5982;&#x5728;n-1&#x4E3A;15(0x1111)&#xFF0C;&#x5176;&#x5B9E;&#x6563;&#x5217;&#x771F;&#x6B63;&#x751F;&#x6548;&#x7684;&#x53EA;&#x662F;&#x4F4E;4bit&#xFF0C;&#x56E0;&#x4E3A;&#x9664;&#x4E86;&#x4F4E;4bit&#x5176;&#x5B83;&#x7684;&#x4F4D;&#x90FD;&#x662F;0&#xFF0C;&#x901A;&#x8FC7;&#x6309;&#x4F4D;&#x4E0E;&#x64CD;&#x4F5C;&#x4E4B;&#x540E;&#x4E5F;&#x90FD;&#x662F;0&#xFF0C;&#x6240;&#x4EE5;&#x5F53;&#x7136;&#x5BB9;&#x6613;&#x78B0;&#x649E;&#x4E86;&#x3002;  </p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x8BBE;&#x8BA1;&#x8005;&#x60F3;&#x4E86;&#x4E00;&#x4E2A;&#x987E;&#x5168;&#x5927;&#x5C40;&#x7684;&#x65B9;&#x6CD5;(&#x7EFC;&#x5408;&#x8003;&#x8651;&#x4E86;&#x901F;&#x5EA6;&#x3001;&#x4F5C;&#x7528;&#x3001;&#x8D28;&#x91CF;)&#xFF0C;&#x5C31;&#x662F;&#x628A;&#x9AD8;16bit&#x548C;&#x4F4E;16&#x4F4D;&#x5F02;&#x6216;&#x4E86;&#x4E00;&#x4E0B;&#x3002;&#x8BBE;&#x8BA1;&#x8005;&#x8FD8;&#x89E3;&#x91CA;&#x5230;&#x56E0;&#x4E3A;&#x73B0;&#x5728;&#x5927;&#x591A;&#x6570;&#x7684;hashCode&#x7684;&#x5206;&#x5E03;&#x5DF2;&#x7ECF;&#x5F88;&#x4E0D;&#x9519;&#x4E86;&#xFF0C;&#x5C31;&#x7B97;&#x53D1;&#x751F;&#x78B0;&#x649E;&#x4E5F;&#x7528;O(logn)&#x7684;tree&#x53BB;&#x505A;&#x4E86;&#x3002;&#x4EC5;&#x4EC5;&#x5F02;&#x6216;&#x4E00;&#x4E0B;&#xFF0C;&#x65E2;&#x51CF;&#x5C11;&#x4E86;&#x7CFB;&#x7EDF;&#x7684;&#x5F00;&#x9500;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x9020;&#x6210;&#x56E0;&#x4E3A;&#x9AD8;&#x4F4D;&#x6CA1;&#x6709;&#x53C2;&#x4E0E;&#x4E0B;&#x6807;&#x7684;&#x8BA1;&#x7B97;(table&#x957F;&#x5EA6;&#x6BD4;&#x8F83;&#x5C0F;&#x65F6;)&#x800C;&#x5F15;&#x8D77;&#x7684;&#x78B0;&#x649E;&#x3002;  </p>
+<p>&#x5982;&#x679C;&#x8FD8;&#x662F;&#x4EA7;&#x751F;&#x4E86;&#x9891;&#x7E41;&#x7684;&#x78B0;&#x649E;&#x4F1A;&#x53D1;&#x751F;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#xFF1F;&#x8BBE;&#x8BA1;&#x8005;&#x6CE8;&#x91CA;&#x8BF4;&#xFF0C;&#x4ED6;&#x4EEC;&#x4F7F;&#x7528;&#x6811;&#x6765;&#x5904;&#x7406;&#x9891;&#x7E41;&#x7684;&#x78B0;&#x649E;&#x3002;  </p>
+<blockquote>
+<p>Improve the performance of java.util.HashMap under high hash-collision conditions by using balanced trees rather than linked lists to store map entries. Implement the same improvement in the LinkedHashMap class.</p>
+</blockquote>
+<p>&#x56DE;&#x60F3;&#x4E00;&#x4E0B;get&#x51FD;&#x6570;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<ol>
+<li>&#x9996;&#x5148;&#x6839;&#x636E;key.hashCode()&#x503C;&#x901A;&#x8FC7;hash()&#x51FD;&#x6570;&#x83B7;&#x53D6;&#x5230;hash&#x503C;&#xFF0C;&#x7136;&#x540E;&#x5229;&#x7528;hash&#x503C;&#x786E;&#x5B9A;bucket&#x7684;index&#xFF1B;</li>
+<li>&#x5982;&#x679C;bucket&#x7684;&#x8282;&#x70B9;&#x7684;key&#x4E0D;&#x662F;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x7684;&#xFF0C;&#x5219;&#x901A;&#x8FC7;keys.equals()&#x5728;&#x94FE;&#x4E2D;&#x627E;&#x3002;  </li>
+</ol>
+<p>&#x5728;Java 8&#x4E4B;&#x524D;&#x662F;&#x7528;&#x94FE;&#x8868;&#x6765;&#x89E3;&#x51B3;&#x51B2;&#x7A81;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x4EA7;&#x751F;&#x51B2;&#x7A81;&#x65F6;&#xFF0C;get&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x5C31;&#x662F;O(1)+O(n),&#x6240;&#x4EE5;&#x5F53;&#x78B0;&#x649E;&#x5F88;&#x5389;&#x5BB3;&#x7684;&#x65F6;&#x5019;n&#x5F88;&#x5927;&#xFF0C;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x6BD4;&#x8F83;&#x9AD8;&#x3002;  </p>
+<p>&#x6240;&#x4EE5;&#x5728;Java 8&#x4E2D;&#xFF0C;&#x5229;&#x7528;&#x7EA2;&#x9ED1;&#x6811;&#x66FF;&#x6362;&#x4E86;&#x94FE;&#x8868;&#xFF0C;&#x8FD9;&#x6837;&#x4F7F;&#x5F97;&#x590D;&#x6742;&#x5EA6;&#x53D8;&#x6210;&#x4E86;O(1)+O(logn),&#x964D;&#x4F4E;&#x4E86;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x3002;  </p>
+<h3 id="6-resize&#x7684;&#x5B9E;&#x73B0;">6. resize&#x7684;&#x5B9E;&#x73B0;</h3>
+<p>&#x5728;put&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x76EE;&#x524D;&#x7684;bucket&#x5360;&#x7528;&#x7A0B;&#x5E8F;&#x4EE5;&#x53CA;&#x8D85;&#x8FC7;&#x4E86;Load Factor&#x6240;&#x5E0C;&#x671B;&#x7684;&#x6BD4;&#x4F8B;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x53D1;&#x751F;resize&#xFF0C;resize&#x7684;&#x8FC7;&#x7A0B;&#x5C31;&#x662F;&#x628A;bucket&#x6269;&#x5145;&#x4E3A;2&#x500D;&#xFF0C;&#x6269;&#x5145;&#x4E4B;&#x540E;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x8BA1;&#x7B97;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x7684;index&#xFF0C;&#x7136;&#x540E;&#x628A;&#x8282;&#x70B9;&#x518D;&#x653E;&#x5230;&#x65B0;&#x7684;bucket&#x4E2D;&#x3002;resize&#x7684;&#x6CE8;&#x91CA;&#x7684;&#x63CF;&#x8FF0;&#xFF1A;</p>
+<blockquote>
+<p>Initializes or doubles table size. If null, allocates in accord with initial capacity target held in field threshold. Otherwise, because we are using power-of-two expansion, the elements from each bin must either stay at same index, or move with a power of two offset in the new table.  </p>
+</blockquote>
+<p>&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5F53;&#x8D85;&#x8FC7;&#x9650;&#x5236;&#x7684;&#x65F6;&#x5019;&#x4F1A;resize&#xFF0C;&#x7136;&#x800C;&#x53C8;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684;&#x662F;2&#x6B21;&#x5E42;&#x7684;&#x6269;&#x5C55;&#xFF0C;&#x6240;&#x4EE5;&#x5143;&#x7D20;&#x7684;&#x4F4D;&#x7F6E;&#x8981;&#x4E48;&#x662F;&#x5728;&#x539F;&#x4F4D;&#x7F6E;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x5728;&#x539F;&#x4F4D;&#x7F6E;&#x518D;&#x79FB;&#x52A8;2&#x6B21;&#x5E42;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
+<p><img src="https://winterliublog.oss-cn-beijing.aliyuncs.com/HashMap/hash-resize.png" alt="">  </p>
+<p>resize&#x51FD;&#x6570;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code>final Node&lt;K,V&gt;[] resize(){
+    Node&lt;K,V&gt;[] oldTab = table;
+    int oldCap = (oldTab == null) ? 0 : oldTab.length;
+    int oldThr = threshold;
+    int newCap, newThr = 0;
+    if (oldCap &gt; 0){
+        // &#x8D85;&#x8FC7;&#x6700;&#x5927;&#x503C;&#x5C31;&#x4E0D;&#x518D;&#x6269;&#x5145;&#xFF0C;&#x5C31;&#x8BA9;&#x5B83;&#x78B0;&#x649E;
+        if (oldCap &gt;= MAXIMUM_CAPACITY) {
+            threshold = Integer.MAX_VALUE;
+            return oldTab;
+        }
+        // &#x6CA1;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x503C;&#xFF0C;&#x5C31;&#x6269;&#x5145;&#x4E3A;&#x539F;&#x6765;&#x7684;2&#x500D;
+        else if ((newCap = oldCap &lt;&lt; 1) &lt; MAXIMUM_CAPACITY &amp;&amp; oldCap &gt;= DEFAULT_INITIAL_CAPACITY)
+            newThr = oldThr &lt;&lt; 1;
+    }
+    else if (oldThr &gt; 0) // initial capacity was placed in threshold
+        newCap = oldThr;
+    else { // zero initial threshold signifies using defaults
+        newCap = DEFAULT_INITIAL_CAPACITY;
+        newThr = (int)(DEFAULT_LOAD_FACTOR * DEFAULT_INITIAL_CAPACITY);
+    }
+    // &#x8BA1;&#x7B97;&#x65B0;&#x7684;resize&#x4E0A;&#x9650;
+    if (newThr == 0){
+        float ft = (float)newCap * loadFactor;
+        newThr = (newCap &lt; MAXIMUN_CAPACITY &amp;&amp; ft &lt; (float)MAXIMUM_CAPACITY ? (int)ft : Integer.MAX_VALUE);
+    }
+    threshold = newThr;
+    @SuppressWarnings({&quot;rawtypes&quot;,&quot;unchecked&quot;})
+        Node&lt;K,V&gt;[] newTab = (Node&lt;K,V&gt;[])new Node[newCap];
+    table = newTab;
+    if (oldTab != null){
+        // &#x628A;&#x6BCF;&#x4E2A;bucket&#x90FD;&#x79FB;&#x52A8;&#x5230;&#x65B0;&#x7684;buckets&#x4E2D;
+        for (int j = 0; j &lt; oldCap; ++j){
+            Node&lt;K,V&gt; e;
+            if ((e = oldTab[j]) != null) {
+                oldTab[j] = null;
+                if (e.next == null)
+                    newTab[e.hash &amp; (newCap - 1)] = e;
+                else if (e instanceof TreeNode)
+                    ((TreeNode&lt;K,V&gt;e).split(this, newTab, j, oldCap);
+                else{ // preserve order
+                    Node&lt;K,V&gt; loHead = null, loTail = null;
+                    Node&lt;K,V&gt; hiHead = null, hiTail = null;
+                    Node&lt;K,V&gt; next;
+                    do {
+                        next = e.next;
+                        // &#x539F;&#x7D22;&#x5F15;
+                        if ((e.hash &amp; oldCap) == 0){
+                            if (loTail == null)
+                                loHead = e;
+                            else
+                                loTail.next = e;
+                            loTail = e;
+                        }
+                        // &#x539F;&#x7D22;&#x5F15;+oldCap
+                        else{
+                            if (hiTail == null)
+                                hiHead = e;
+                            else
+                                hiTail.next = e;
+                            hiTail = e;
+                        }
+                    }while((e = next) != null);
+                    // &#x539F;&#x7D22;&#x5F15;&#x653E;&#x5230;bucket&#x91CC;
+                    if (loTail != null){
+                        loTail.next = null;
+                        newTab[j] = loHead;
+                    }
+                    // &#x539F;&#x7D22;&#x5F15;+oldCap&#x653E;&#x5230;bucket&#x91CC;
+                    if (hiTail != null){
+                        hiTail.next = null;
+                        newTab[j + oldCap] = hiHead;
+                    }
+                }
+            }
+        }
+    }
+    return newTab;
+}
+</code></pre><h3 id="7-&#x603B;&#x7ED3;">7. &#x603B;&#x7ED3;</h3>
+<p>&#x56DE;&#x5230;&#x5F00;&#x59CB;&#x7684;&#x51E0;&#x4E2A;&#x95EE;&#x9898;&#xFF1A; </p>
+<p><strong>1.&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x4F1A;&#x4F7F;&#x7528;HashMap?&#x5B83;&#x6709;&#x4EC0;&#x4E48;&#x7279;&#x70B9;&#xFF1F;</strong>   </p>
+<p>HashMap&#x662F;&#x57FA;&#x4E8E;Map&#x63A5;&#x53E3;&#x5B9E;&#x73B0;&#x7684;&#xFF0C;&#x5B83;&#x5B58;&#x50A8;&#x952E;&#x503C;&#x5BF9;&#xFF0C;&#x5141;&#x8BB8;&#x5B58;&#x50A8;null&#x7684;&#x952E;&#x503C;&#xFF0C;&#x5B83;&#x662F;&#x975E;&#x540C;&#x6B65;&#x7684;&#xFF0C;HashMap&#x5B58;&#x50A8;&#x7740;Entry(hash, key, value, next)&#x5BF9;&#x8C61;&#x3002;</p>
+<p><strong>2.HashMap&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#xFF1F;</strong> </p>
+<p>&#x901A;&#x8FC7;hash&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;put&#x548C;get&#x5B58;&#x50A8;&#x548C;&#x83B7;&#x53D6;&#x5BF9;&#x8C61;&#x3002;&#x5B58;&#x50A8;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5C06;K/V&#x4F20;&#x7ED9;put&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x8C03;&#x7528;hashCode&#x8BA1;&#x7B97;hash&#x4ECE;&#x800C;&#x5F97;&#x5230;bucket&#x4F4D;&#x7F6E;&#xFF0C;HashMap&#x8FD8;&#x4F1A;&#x6839;&#x636E;&#x5F53;&#x524D;bucket&#x7684;&#x5360;&#x7528;&#x60C5;&#x51B5;&#x81EA;&#x52A8;&#x8C03;&#x6574;&#x5BB9;&#x91CF;&#x3002;&#x83B7;&#x53D6;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5C06;K&#x4F20;&#x7ED9;get,&#x5B83;&#x8C03;&#x7528;hashCode&#x8BA1;&#x7B97;hash&#x4ECE;&#x800C;&#x5F97;&#x5230;bucket&#x4F4D;&#x7F6E;&#xFF0C;&#x5E76;&#x8FDB;&#x4E00;&#x6B65;&#x8C03;&#x7528;equals()&#x65B9;&#x6CD5;&#x786E;&#x5B9A;&#x952E;&#x503C;&#x5BF9;&#x3002;&#x5982;&#x679C;&#x53D1;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x4F1A;&#x901A;&#x8FC7;&#x94FE;&#x8868;&#x7684;&#x65B9;&#x5F0F;&#x5C06;&#x78B0;&#x649E;&#x51B2;&#x7A81;&#x7684;&#x5143;&#x7D20;&#x7EC4;&#x7EC7;&#x8D77;&#x6765;&#xFF0C;Java 8&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x78B0;&#x649E;&#x51B2;&#x7A81;&#x7684;&#x5143;&#x7D20;&#x8D85;&#x8FC7;&#x67D0;&#x4E2A;&#x9650;&#x5236;&#xFF0C;&#x5219;&#x7528;&#x7EA2;&#x9ED1;&#x6811;&#x6765;&#x66FF;&#x6362;&#x94FE;&#x8868;&#xFF0C;&#x63D0;&#x9AD8;&#x901F;&#x5EA6;&#x3002;</p>
+<p><strong>3.get&#x548C;put&#x7684;&#x539F;&#x7406;&#xFF1F;equals()&#x548C;hashCode()&#x90FD;&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#xFF1F;</strong>  </p>
+<p>&#x901A;&#x8FC7;&#x5BF9;key&#x7684;hashCode()&#x8FDB;&#x884C;hashing,&#x5E76;&#x8BA1;&#x7B97;&#x4E0B;&#x6807;(n-1 &amp; hash),&#x4ECE;&#x800C;&#x83B7;&#x5F97;buckets&#x7684;&#x4F4D;&#x7F6E;&#x3002;&#x5982;&#x679C;&#x4EA7;&#x751F;&#x78B0;&#x649E;&#xFF0C;&#x5219;&#x5229;&#x7528;key.equals()&#x65B9;&#x6CD5;&#x53BB;&#x94FE;&#x8868;&#x6216;&#x6811;&#x4E2D;&#x67E5;&#x627E;&#x5BF9;&#x5E94;&#x7684;&#x8282;&#x70B9;&#x3002;</p>
+<p><strong>4.hash&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#xFF1F;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD9;&#x6837;&#x5B9E;&#x73B0;&#xFF1F;</strong>  </p>
+<p>Java 8&#x662F;&#x901A;&#x8FC7;hashCode()&#x7684;&#x9AD8;16bit&#x5F02;&#x6216;&#x4F4E;16bit&#x5B9E;&#x73B0;&#x7684;: ==(h = k.hashCode() ^ (h &gt;&gt;&gt; 16)==,&#x4E3B;&#x8981;&#x662F;&#x4ECE;&#x901F;&#x5EA6;&#x3001;&#x529F;&#x6548;&#x3001;&#x8D28;&#x91CF;&#x6765;&#x8003;&#x8651;&#xFF0C;&#x8FD9;&#x4E48;&#x505A;&#x53EF;&#x4EE5;&#x5728;bucket&#x7684;n&#x6BD4;&#x8F83;&#x5C0F;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E5F;&#x80FD;&#x4FDD;&#x8BC1;&#x8003;&#x8651;&#x5230;&#x9AD8;&#x4F4E;bit&#x90FD;&#x53C2;&#x4E0E;&#x5230;hash&#x7684;&#x8BA1;&#x7B97;&#x4E2D;&#xFF0C;&#x540C;&#x65F6;&#x4E0D;&#x4F1A;&#x6709;&#x592A;&#x5927;&#x5F00;&#x9500;&#x3002;</p>
+<p><strong>5.&#x5F53;HashMap&#x5927;&#x5C0F;&#x8D85;&#x8FC7;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;&#x5B9A;&#x4E49;&#x7684;&#x5BB9;&#x91CF;&#xFF0C;&#x600E;&#x4E48;&#x529E;&#xFF1F;</strong>  </p>
+<p>&#x5982;&#x679C;&#x8D85;&#x8FC7;&#x4E86;&#x8D1F;&#x8F7D;&#x56E0;&#x5B50;(&#x9ED8;&#x8BA4;0.75)&#xFF0C;&#x5219;&#x4F1A;&#x91CD;&#x65B0;resize&#x4E00;&#x4E2A;&#x539F;&#x6765;&#x957F;&#x5EA6;&#x4E24;&#x500D;&#x7684;HashMap,&#x5E76;&#x4E14;&#x91CD;&#x65B0;&#x8C03;&#x7528;hash&#x65B9;&#x6CD5;&#x3002;  </p>
+<p>&#x6765;&#x81EA;<a href="http://calvin1978.blogcn.com/articles/collection.html" target="_blank">&#x6C5F;&#x5357;&#x767D;&#x8863;</a>&#xFF1A;</p>
+<blockquote>
+<p>iterator()&#x65F6;&#x662F;&#x987A;&#x7740;&#x54C8;&#x5E0C;&#x6876;&#x6570;&#x7EC4;&#x6765;&#x904D;&#x5386;&#x7684;&#xFF0C;&#x770B;&#x8D77;&#x6765;&#x662F;&#x4E2A;&#x4E71;&#x5E8F;&#x3002;  </p>
+</blockquote>
+<p>&#x672C;&#x6587;&#x6765;&#x81EA;&#xFF1A;<a href="https://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank">Java-HashMap&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x53CA;&#x5B9E;&#x73B0;</a></p>
+
+<script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Java.html" class="navigation navigation-prev " aria-label="Previous page: Java 基础">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Compute-Network.html" class="navigation navigation-next " aria-label="Next page: Compute-Network">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Java中HashMap底层原理","level":"1.2.2","depth":2,"next":{"title":"Compute-Network","level":"1.3","depth":1,"path":"notes/Compute-Network.md","ref":"notes/Compute-Network.md","articles":[]},"previous":{"title":"Java 基础","level":"1.2.1","depth":2,"path":"notes/Java.md","ref":"notes/Java.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","chapter-fold","code","splitter","-lunr","-search","search-pro","insert-logo","popup","-sharing","sharing-plus"],"pluginsConfig":{"chapter-fold":{},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"sharing":{"douban":true,"qq":true,"qzone":true,"weibo":true,"all":["douban","weibo","qq","qzone"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 50px; min-height: 50px;border-radius: 50%","url":"https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/avatar.JPG"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"notes/Java中HashMap底层原理.md","mtime":"2019-11-28T07:48:59.138Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-07T08:14:31.718Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-chapter-fold/chapter-fold.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-code/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing-plus/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
