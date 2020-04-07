@@ -27,7 +27,7 @@
                   "copyright":"Copyright &copy winterliu",
                   "modify_label": "该文章修订时间：",
                   "modify_format": "YYYY-MM-DD HH:mm:ss"
-              }
+              },
       "sharing": {
           "douban": true,
           "qq": true,
