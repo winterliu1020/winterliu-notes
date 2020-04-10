@@ -10,4 +10,6 @@
     * [计算机网络介绍](notes/计算机网络介绍.md)
 * [LeetCode](notes/LeetCode.md)
     * [第一](notes/1.md)
+* [数据结构和算法之美](notes/数据结构和算法之美.md)
+    * [入门篇](notes/入门篇.md)
 
