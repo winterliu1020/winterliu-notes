@@ -14,6 +14,6 @@
     * [入门篇](notes/数据结构和算法之美/入门篇.md)
     * [数组](notes/数据结构和算法之美/数组.md)
     * [链表](notes/数据结构和算法之美/链表.md)
-* [Linux](SUMMARY/Linux.md)
-    * [Linux 目录介绍](Linux/Linux 目录介绍.md)
+* [Linux](notes/SUMMARY/Linux.md)
+    * [Linux 目录介绍](notes/Linux/Linux 目录介绍.md)
 
