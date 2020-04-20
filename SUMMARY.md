@@ -16,4 +16,6 @@
     * [链表](notes/数据结构和算法之美/链表.md)
 * [Linux](notes/SUMMARY/Linux.md)
     * [Linux 目录介绍](notes/Linux/Linux 目录介绍.md)
+* [其它](notes/SUMMARY/其它.md)
+    * [springboot 和 Django 项目部署到阿里云](notes/其它/springboot 和 Django 项目部署到阿里云.md)
 
