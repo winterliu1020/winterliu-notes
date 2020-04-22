@@ -24,4 +24,5 @@
     * [Linux 目录介绍](notes/Linux/Linux 目录介绍.md)
 * [其它](notes/SUMMARY/其它.md)
     * [springboot 和 Django 项目部署到阿里云](notes/其它/springboot 和 Django 项目部署到阿里云.md)
+    * [Mac 安装 Ruby 及 Jekyll 并利用 GitHub Pages 搭建博客](notes/其它/Mac 安装 Ruby 及 Jekyll 并利用 GitHub Pages 搭建博客.md)
 
