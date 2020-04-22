@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Java 基础1 · GitBook</title>
+        <title>队列 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -85,10 +85,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../SUMMARY/Java 并发.html" />
+    <link rel="next" href="栈.html" />
     
     
-    <link rel="prev" href="../SUMMARY/Java 基础.html" />
+    <link rel="prev" href="链表.html" />
     
 
     </head>
@@ -144,9 +144,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="Java基础知识.html">
+        <li class="chapter " data-level="1.2.1" data-path="../Java 基础/Java基础知识.html">
             
-                <a href="Java基础知识.html">
+                <a href="../Java 基础/Java基础知识.html">
             
                     
                     Java 基础1
@@ -324,9 +324,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../数据结构和算法之美/入门篇.html">
+        <li class="chapter " data-level="1.6.1" data-path="入门篇.html">
             
-                <a href="../数据结构和算法之美/入门篇.html">
+                <a href="入门篇.html">
             
                     
                     入门篇
@@ -337,9 +337,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="../数据结构和算法之美/数组.html">
+        <li class="chapter " data-level="1.6.2" data-path="数组.html">
             
-                <a href="../数据结构和算法之美/数组.html">
+                <a href="数组.html">
             
                     
                     数组
@@ -350,9 +350,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="../数据结构和算法之美/链表.html">
+        <li class="chapter " data-level="1.6.3" data-path="链表.html">
             
-                <a href="../数据结构和算法之美/链表.html">
+                <a href="链表.html">
             
                     
                     链表
@@ -363,9 +363,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.4" data-path="../数据结构和算法之美/队列.html">
+        <li class="chapter active" data-level="1.6.4" data-path="队列.html">
             
-                <a href="../数据结构和算法之美/队列.html">
+                <a href="队列.html">
             
                     
                     队列
@@ -376,9 +376,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.5" data-path="../数据结构和算法之美/栈.html">
+        <li class="chapter " data-level="1.6.5" data-path="栈.html">
             
-                <a href="../数据结构和算法之美/栈.html">
+                <a href="栈.html">
             
                     
                     栈
@@ -389,9 +389,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.6" data-path="../数据结构和算法之美/排序.html">
+        <li class="chapter " data-level="1.6.6" data-path="排序.html">
             
-                <a href="../数据结构和算法之美/排序.html">
+                <a href="排序.html">
             
                     
                     排序
@@ -501,7 +501,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Java 基础1</a>
+        <a href="../.." >队列</a>
     </h1>
 </div>
 
@@ -516,9 +516,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="java&#x57FA;&#x7840;1">Java&#x57FA;&#x7840;1</h1>
+                                <h2 id="&#x961F;&#x5217;">&#x961F;&#x5217;</h2>
+<p>&#x548C;&#x6808;&#x4E00;&#x6837;&#xFF0C;&#x4E5F;&#x662F;&#x4E00;&#x79CD;&#x64CD;&#x4F5C;&#x53D7;&#x9650;&#x7684;&#x7EBF;&#x6027;&#x8868;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5148;&#x8FDB;&#x5148;&#x51FA;&#x3002;&#x4E5F;&#x6709;&#x987A;&#x5E8F;&#x961F;&#x5217;&#x548C;&#x94FE;&#x5F0F;&#x961F;&#x5217;&#x3002;&#x961F;&#x5217;&#x4E2D;&#x6709; head&#xFF0C;tail&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7528;&#x7684;&#x662F;&#x6570;&#x7EC4;&#x6765;&#x5B9E;&#x73B0;&#x961F;&#x5217;&#xFF0C;&#x90A3;&#x4E48;&#x5F53; tail = n &#x65F6;&#xFF0C;&#x5C31;&#x5E94;&#x8BE5;&#x6267;&#x884C;&#x6570;&#x636E;&#x642C;&#x79FB;&#x64CD;&#x4F5C;&#xFF0C;&#x5C06;&#x6240;&#x6709;&#x6570;&#x636E;&#x5411;&#x524D;&#x79FB;&#x81F3;&#x6570;&#x7EC4;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
+<p><img src="https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x7B97;&#x6CD5;&#x4E4B;&#x7F8E;/queue-array.png" alt=""></p>
+<p><strong>&#x5FAA;&#x73AF;&#x961F;&#x5217;</strong></p>
+<p>&#x5982;&#x679C;&#x6BCF;&#x6B21;&#x5F53; tail = n &#x7684;&#x65F6;&#x5019;&#x90FD;&#x8981;&#x53BB;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x642C;&#x79FB;&#xFF0C;&#x90A3;&#x4E48;&#x4F1A;&#x5F71;&#x54CD;&#x5165;&#x961F;&#x7684;&#x6027;&#x80FD;&#x3002;&#x6240;&#x4EE5;&#x91C7;&#x7528;&#x5FAA;&#x73AF;&#x961F;&#x5217;&#xFF0C;&#x90A3;&#x4E48;&#x8981;&#x6CE8;&#x610F;&#xFF1A;&#x7528;&#x6570;&#x7EC4;&#x5B9E;&#x73B0;&#x7684;&#x975E;&#x5FAA;&#x73AF;&#x961F;&#x5217;&#x5224;&#x65AD;&#x961F;&#x6EE1;&#x6761;&#x4EF6;&#x662F;&#xFF1A;tail = n&#xFF0C;&#x961F;&#x7A7A;&#xFF1A;head = tail&#x3002;&#x90A3;&#x4E48;&#x5224;&#x65AD;&#x5FAA;&#x73AF;&#x961F;&#x5217;&#x961F;&#x6EE1;&#x7684;&#x6761;&#x4EF6;&#xFF1A;(tail + 1)%n = head&#xFF0C;&#x961F;&#x7A7A;&#xFF1A;head = tail&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#x5FAA;&#x73AF;&#x961F;&#x5217;&#x6700;&#x540E;&#x4E00;&#x4E2A; tail &#x662F;&#x4E0D;&#x5B58;&#x6570;&#x636E;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x6700;&#x540E;&#x4E00;&#x4E2A; tail &#x4E5F;&#x5B58;&#x4E86;&#x6570;&#x636E;&#xFF0C;&#x4F60;&#x5C31;&#x65E0;&#x6CD5;&#x5224;&#x65AD;&#x662F;&#x961F;&#x6EE1;&#x8FD8;&#x662F;&#x961F;&#x7A7A;&#x3002;</p>
+<p><img src="https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x7B97;&#x6CD5;&#x4E4B;&#x7F8E;/queue-recycle.png" alt=""></p>
+<p><strong>&#x963B;&#x585E;&#x961F;&#x5217;</strong></p>
+<p>&#x5C31;&#x662F;&#x5728;&#x961F;&#x5217;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x589E;&#x52A0;&#x4E86;&#x963B;&#x585E;&#x64CD;&#x4F5C;&#xFF0C;&#x5728;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#x7684;&#x65F6;&#x5019;&#x5F80;&#x961F;&#x5217;&#x4E2D;&#x53D6;&#x5143;&#x7D20;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#xFF0C;&#x961F;&#x5217;&#x6EE1;&#x7684;&#x65F6;&#x5019;&#x63D2;&#x5165;&#x5143;&#x7D20;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#x3002;&#x6240;&#x4EE5;&#x8FD9;&#x548C;&#x201C;&#x751F;&#x4EA7;&#x8005;-&#x6D88;&#x8D39;&#x8005;&#x201D;&#x6A21;&#x578B;&#x5F88;&#x50CF;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x534F;&#x8C03;&#x751F;&#x4EA7;&#x8005;&#x548C;&#x6D88;&#x8D39;&#x8005;&#x7684;&#x6570;&#x91CF;&#x6765;&#x63D0;&#x9AD8;&#x6570;&#x636E;&#x7684;&#x5904;&#x7406;&#x6548;&#x7387;&#x3002;</p>
+<p><img src="https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x7B97;&#x6CD5;&#x4E4B;&#x7F8E;/queue-block.png" alt=""></p>
+<p>&#x8FD9;&#x91CC;&#x8BBE;&#x7F6E;&#x4E86;&#x4E09;&#x4E2A;&#x7EBF;&#x7A0B;&#x53BB; take&#xFF0C;&#x6240;&#x4EE5;&#x4F1A;&#x6D89;&#x53CA;&#x5230;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF0C;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x961F;&#x5217;&#x79F0;&#x4E3A;&#x5E76;&#x53D1;&#x961F;&#x5217;&#xFF0C;&#x6700;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x5C31;&#x662F;&#x5728; enqueue() &#x548C; dequeue() &#x51FD;&#x6570;&#x4E0A;&#x52A0;&#x4E0A;&#x9501;&#xFF0C;&#x4F46;&#x9501;&#x7C92;&#x5EA6;&#x8FC7;&#x5927;&#x4F1A;&#x5BFC;&#x81F4;&#x5E76;&#x53D1;&#x5EA6;&#x4F4E;&#x3002; </p>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; winterliu all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2020-04-11 11:40:20
+2020-04-21 22:00:43
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -547,12 +557,12 @@
 
             
                 
-                <a href="../SUMMARY/Java 基础.html" class="navigation navigation-prev " aria-label="Previous page: Java 基础">
+                <a href="链表.html" class="navigation navigation-prev " aria-label="Previous page: 链表">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../SUMMARY/Java 并发.html" class="navigation navigation-next " aria-label="Next page: Java 并发">
+                <a href="栈.html" class="navigation navigation-next " aria-label="Next page: 栈">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -563,7 +573,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java 基础1","level":"1.2.1","depth":2,"next":{"title":"Java 并发","level":"1.3","depth":1,"path":"notes/SUMMARY/Java 并发.md","ref":"notes/SUMMARY/Java 并发.md","articles":[{"title":"负载均衡三种架构","level":"1.3.1","depth":2,"path":"notes/Java 并发/负载均衡三种架构.md","ref":"notes/Java 并发/负载均衡三种架构.md","articles":[]},{"title":"网络的层次介绍","level":"1.3.2","depth":2,"path":"notes/Java 并发/网络的层次介绍.md","ref":"notes/Java 并发/网络的层次介绍.md","articles":[]}]},"previous":{"title":"Java 基础","level":"1.2","depth":1,"path":"notes/SUMMARY/Java 基础.md","ref":"notes/SUMMARY/Java 基础.md","articles":[{"title":"Java 基础1","level":"1.2.1","depth":2,"path":"notes/Java 基础/Java基础知识.md","ref":"notes/Java 基础/Java基础知识.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","chapter-fold","code","splitter","-lunr","-search","search-pro","insert-logo","popup","-sharing","sharing-plus","chapter-fold","custom-favicon","pageview-count","tbfed-pagefooter"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy winterliu","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"favicon.ico","back-to-top-button":{},"pageview-count":{},"custom-favicon":{},"sharing":{"douban":true,"qq":true,"qzone":true,"weibo":true,"all":["douban","weibo","qq","qzone"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 50px; min-height: 50px;border-radius: 50%","url":"https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/avatar.JPG"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"notes/Java 基础/Java基础知识.md","mtime":"2020-04-11T03:40:20.960Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-22T15:12:28.543Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"队列","level":"1.6.4","depth":2,"next":{"title":"栈","level":"1.6.5","depth":2,"path":"notes/数据结构和算法之美/栈.md","ref":"notes/数据结构和算法之美/栈.md","articles":[]},"previous":{"title":"链表","level":"1.6.3","depth":2,"path":"notes/数据结构和算法之美/链表.md","ref":"notes/数据结构和算法之美/链表.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["back-to-top-button","chapter-fold","code","splitter","-lunr","-search","search-pro","insert-logo","popup","-sharing","sharing-plus","chapter-fold","custom-favicon","pageview-count","tbfed-pagefooter"],"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy winterliu","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"favicon.ico","back-to-top-button":{},"pageview-count":{},"custom-favicon":{},"sharing":{"douban":true,"qq":true,"qzone":true,"weibo":true,"all":["douban","weibo","qq","qzone"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"style":"background: none; max-height: 50px; min-height: 50px;border-radius: 50%","url":"https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/avatar.JPG"}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"notes/数据结构和算法之美/队列.md","mtime":"2020-04-21T14:00:43.797Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-22T15:12:28.543Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
