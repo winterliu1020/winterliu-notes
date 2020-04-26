@@ -13,6 +13,8 @@
     * [2_AddTwoNumbers](notes/LeetCode/2_AddTwoNumbers.md)
     * [3_LongestSubstringWithoutRepeatingCharacters](notes/LeetCode/3_LongestSubstringWithoutRepeatingCharacters.md)
     * [15_3Sum](notes/LeetCode/15_3Sum.md)
+    * [回溯、DFS、递归](notes/LeetCode/回溯、DFS、递归.md)
+    * [动态规划（与分治、贪心的区别）](notes/LeetCode/动态规划（与分治、贪心的区别）.md)
 * [数据结构和算法之美](notes/SUMMARY/数据结构和算法之美.md)
     * [入门篇](notes/数据结构和算法之美/入门篇.md)
     * [数组](notes/数据结构和算法之美/数组.md)
