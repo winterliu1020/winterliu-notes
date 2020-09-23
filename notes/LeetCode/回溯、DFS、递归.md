@@ -71,5 +71,48 @@ class Solution {
 
 
 
+[39题 Combination Sum](https://leetcode.com/problems/combination-sum/) 用回溯来做：
+
+```java
+class Solution {
+    List<List<Integer>> result = null; // 保存满足条件的回溯路线
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        // 用回溯来做，回溯其实就是多叉树的遍历
+        result = new ArrayList<>();
+        if (candidates.length == 0) {
+            return result;
+        }
+        
+        // Arrays.sort(candidates);
+        
+        List<Integer> track = new ArrayList<>(); // 保存当前的回溯路线
+        int curr = 0;
+        backTrack(candidates, target, track, curr);
+        
+        return result;
+    }
+    
+    public void backTrack(int[] candidates, int target, List<Integer> track, int curr) {
+        
+        if (target < 0) {
+            return;
+        }
+        if (target == 0) { // target是随着回溯过程在变化的
+            // 触发结束条件
+            result.add(new ArrayList(track));
+            return;
+        }
+        
+        for (int i = curr; i < candidates.length; i++) { // i应该从curr这个位置开始，因为题目说了可以重复选择某个元素
+            track.add(candidates[i]);
+            backTrack(candidates, target - candidates[i], track, i);
+            track.remove(track.size() - 1);
+        }
+    }
+}
+```
+
+
+
 
 
