@@ -2,7 +2,7 @@
 
 * [Introduction](README.md)
 * [Java 基础](notes/SUMMARY/Java 基础.md)
-    * [Java 基础1](notes/Java 基础/Java基础知识.md)
+    * [Java 基础知识](notes/Java 基础/Java基础知识.md)
     * [Java 内存区域](notes/Java 基础/Java内存区域.md)
     * [Java 中 HashMap 底层原理](notes/Java 基础/Java中HashMap底层原理.md)
     * [JVM 垃圾收集器与内存分配策略](notes/Java 基础/垃圾收集器与内存分配策略.md)
@@ -29,6 +29,9 @@
     * [排序](notes/数据结构和算法之美/排序.md)
 * [Linux](notes/SUMMARY/Linux.md)
     * [Linux 目录介绍](notes/Linux/Linux 目录介绍.md)
+    * [Linux 常用命令汇总](notes/Linux/Linux 常用命令汇总.md)
+* [研究生学习任务](notes/SUMMARY/研究生学习任务.md)
+    * [2020-09-25-学习任务-1](notes/研究生学习任务/2020-09-25-学习任务-1.md)
 * [其它](notes/SUMMARY/其它.md)
     * [springboot 和 Django 项目部署到阿里云](notes/其它/springboot 和 Django 项目部署到阿里云.md)
     * [Mac 安装 Ruby 及 Jekyll 并利用 GitHub Pages 搭建博客](notes/其它/Mac 安装 Ruby 及 Jekyll 并利用 GitHub Pages 搭建博客.md)
