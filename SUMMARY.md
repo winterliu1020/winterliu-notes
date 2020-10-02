@@ -29,7 +29,7 @@
     * [排序](notes/数据结构和算法之美/排序.md)
 * [Linux](notes/SUMMARY/Linux.md)
     * [Linux 目录介绍](notes/Linux/Linux 目录介绍.md)
-    * [Linux 常用命令汇总](notes/Linux/Linux 常用命令汇总.md)
+    * [Linux 常用命令汇总](notes/Linux/Linux常用命令汇总.md)
 * [研究生学习任务](notes/SUMMARY/研究生学习任务.md)
     * [2020-09-25-学习任务-1](notes/研究生学习任务/2020-09-25-学习任务-1.md)
 * [其它](notes/SUMMARY/其它.md)
