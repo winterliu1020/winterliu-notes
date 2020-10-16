@@ -14,9 +14,7 @@
       "chapter-fold",
       "custom-favicon",
       "pageview-count",
-      "tbfed-pagefooter",
-      "advanced-emoji"
-      
+      "tbfed-pagefooter"
   ],
   "pluginsConfig": {
       "insert-logo": {
