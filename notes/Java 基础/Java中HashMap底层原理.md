@@ -6,7 +6,7 @@
 - 当HashMap的大小超过了负载因子(load factor)定义的容量，怎么办？
 
 当执行下面的操作时：
-```
+```java
 HashMap<String,Integer> map = new HashMap<String,Integer>();
 map.put("语文",1);
 map.put("数学",2);
@@ -58,7 +58,7 @@ put函数的大致思路是：
 6. 如果bucket满了，就resize.  
 
 具体代码如下：
-```
+```java
 public V put(K key, V value){
     // 对key的hashCode()做hash
     return putVal(hash(key), key, value, false, true);
@@ -114,7 +114,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict){
 1. bucket里面第一个节点，直接命中
 2. 如果有冲突，则通过key.equals(k)去查找对应的entry，如果为树，则在树中通过key.equals(k)查找，O(logn);如果是链表，则在链表中通过key.equals(k)查找，O(n).  
 
-```
+```java
 public V get(Object key){
     Node<K,V> e;
     return (e = getNode(hash(key), key)) == null ? null : e.value;
@@ -140,13 +140,13 @@ final Node<K,V> getNode(int hash, Object key){
     }
     return null;
 }
-```  
+```
 
 ### 5. hash函数的实现
 在get和put过程中，计算下标时，首先对hashCode进行hash操作获取到hash值，然后通过hash值进一步计算下标。  
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/HashMap/hash-function.png)
-```
+```java
 static final int hash(Object key) {
     int h;
     return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
@@ -168,7 +168,7 @@ static final int hash(Object key) {
 2. 如果bucket的节点的key不是我们需要的，则通过keys.equals()在链中找。  
 
 在Java 8之前是用链表来解决冲突的，所以产生冲突时，get的时间复杂度就是O(1)+O(n),所以当碰撞很厉害的时候n很大，时间复杂度比较高。  
-  
+
 所以在Java 8中，利用红黑树替换了链表，这样使得复杂度变成了O(1)+O(logn),降低了时间复杂度。  
 
 ### 6. resize的实现
@@ -181,7 +181,7 @@ static final int hash(Object key) {
 
 resize函数代码实现：
 
-```
+```java
 final Node<K,V>[] resize(){
     Node<K,V>[] oldTab = table;
     int oldCap = (oldTab == null) ? 0 : oldTab.length;
@@ -263,6 +263,7 @@ final Node<K,V>[] resize(){
 }
 ```
 ### 7. 总结
+
 回到开始的几个问题： 
 
 **1.什么时候会使用HashMap?它有什么特点？**   
@@ -287,5 +288,5 @@ Java 8是通过hashCode()的高16bit异或低16bit实现的: ==(h = k.hashCode()
 
 来自[江南白衣](http://calvin1978.blogcn.com/articles/collection.html)：
 > iterator()时是顺着哈希桶数组来遍历的，看起来是个乱序。  
-  
+
 本文来自：[Java-HashMap工作原理及实现](https://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/)

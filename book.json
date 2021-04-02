@@ -15,7 +15,10 @@
       "custom-favicon",
       "pageview-count",
       "tbfed-pagefooter",
-      "advanced-emoji"
+      "advanced-emoji",
+      "summary",
+      "toggle-chapters",
+      "theme-comscore"
   ],
   "pluginsConfig": {
       "insert-logo": {

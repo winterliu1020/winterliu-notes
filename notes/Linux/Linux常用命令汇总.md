@@ -80,3 +80,17 @@ $find / -name *passwd* // *通配符
 
 ```
 
+移动文件：
+
+```shell
+## 可以用mv命令来重命名
+$ mv test1.txt test2.txt # 将test1重命名为test2
+$ mv file1.txt file2.txt file3.txt folder # 移动多个文件到某个文件夹
+
+# 加了-u 表示foo.txt bar.txt这两个文件中只有比bar文件夹中的文件更加新的才会移动到bar中
+$ mv -u foo.txt bar.txt bar # 注意：bar文件夹中也有foo.txt bar.txt文件；The file foo.txt is not moved as it is older than the file in the destination folder.
+
+# 移动多个文件(夹)到 某个目录  加-t即可
+mv build config test1.txt -t folder
+```
+
