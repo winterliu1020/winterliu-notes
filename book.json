@@ -1,47 +1,49 @@
 {
-  "plugins": [
-      "back-to-top-button",
-      "chapter-fold",
-      "code",
-      "splitter",
-      "-lunr",
-      "-search",
-      "search-pro",
-      "insert-logo",
-      "popup",
-      "-sharing",
-      "sharing-plus",
-      "chapter-fold",
-      "custom-favicon",
-      "pageview-count",
-      "tbfed-pagefooter",
-      "advanced-emoji",
-      "summary",
-      "toggle-chapters",
-      "theme-comscore"
-  ],
-  "pluginsConfig": {
-      "insert-logo": {
-          "url": "https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/avatar.JPG",
-          "style": "background: none; max-height: 50px; min-height: 50px;border-radius: 50%"
-      },
-      "favicon": "favicon.ico",
-      "tbfed-pagefooter": {
-                  "copyright":"Copyright &copy winterliu",
-                  "modify_label": "该文章修订时间：",
-                  "modify_format": "YYYY-MM-DD HH:mm:ss"
-              },
-      "sharing": {
-          "douban": true,
-          "qq": true,
-          "qzone": true,
-          "weibo": true,
-          "all": [
-              "douban",
-              "weibo",
-              "qq",
-              "qzone"
-          ]
-      }
-  }
+    "plugins": [
+        "back-to-top-button",
+        "code",
+        "splitter",
+        "-lunr",
+        "-search",
+        "search-pro",
+        "insert-logo",
+        "popup",
+        "-sharing",
+        "sharing-plus",
+        "chapter-fold",
+        "custom-favicon",
+        "pageview-count",
+        "tbfed-pagefooter",
+        "advanced-emoji",
+        "summary",
+        "toggle-chapters",
+        "theme-comscore"
+    ],
+    "pluginsConfig": {
+        "insert-logo": {
+            "url": "https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/avatar.JPG",
+            "style": "background: none; max-height: 50px; min-height: 50px;border-radius: 50%"
+        },
+        "favicon": "favicon.ico",
+        "tbfed-pagefooter": {
+            "copyright": "Copyright &copy winterliu",
+            "modify_label": "该文章修订时间：",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "sharing": {
+            "douban": true,
+            "qq": true,
+            "qzone": true,
+            "weibo": true,
+            "all": [
+                "douban",
+                "weibo",
+                "qq",
+                "qzone"
+            ]
+        }
+    },
+    "dependencies": {
+        "gitbook-plugin-summary": "^1.1.0"
+    }
 }
