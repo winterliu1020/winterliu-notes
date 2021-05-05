@@ -1,17 +1,19 @@
 
 ## Java 基础
 
+- [HashMap在1.7和1.8中的线程不安全问题](1-Java 基础/HashMap在1.7和1.8中的线程不安全问题.md)
 - [Java中HashMap并发环境下造成死循环](1-Java 基础/Java中HashMap并发环境下造成死循环.md)
 - [Java中HashMap底层原理](1-Java 基础/Java中HashMap底层原理.md)
 - [Java中序列化问题和Transient关键字](1-Java 基础/Java中序列化问题和transient关键字.md)
 - [Java中的反射](1-Java 基础/Java中的反射.md)
 - [Java中的泛型](1-Java 基础/Java中的泛型.md)
-- [Java内存区域](1-Java 基础/Java内存区域.md)
+- [Java内存模型](1-Java 基础/Java内存模型.md)
 - [Java基本数据类型及其封装类](1-Java 基础/Java基本数据类型及其封装类.md)
 - [Java容器](1-Java 基础/Java容器.md)
 - [Java对象](1-Java 基础/Java对象.md)
 - [Java数组底层实现原理](1-Java 基础/Java数组底层实现原理.md)
 - [Java特性 封装继承多态](1-Java 基础/Java特性-封装继承多态.md)
+- [Java虚拟机内存区域](1-Java 基础/Java虚拟机内存区域.md)
 - [垃圾收集器与内存分配策略](1-Java 基础/垃圾收集器与内存分配策略.md)
 - [对Java中Class类理解](1-Java 基础/对Java中Class类理解.md)
 
@@ -23,9 +25,11 @@
 ## 分布式
 
 - [CAP](11-分布式/CAP.md)
+- [分布式事务](11-分布式/分布式事务.md)
 
 ## 其它
 
+- [Github Action指南](12-其它/Github Action指南.md)
 - [Mac 安装 Ruby 及 Jekyll 并利用 GitHub Pages 搭建博客](12-其它/Mac 安装 Ruby 及 Jekyll 并利用 GitHub Pages 搭建博客.md)
 - [Springboot 和 Django 项目部署到阿里云](12-其它/springboot 和 Django 项目部署到阿里云.md)
 
@@ -49,6 +53,15 @@
 - [负载均衡三种架构](2-Java 并发/7-负载均衡三种架构.md)
 - [网络的层次介绍](2-Java 并发/8-网络的层次介绍.md)
 - [Java并发各个知识点](2-Java 并发/9-Java并发各个知识点.md)
+- [AQS源码解读一](2-Java 并发/AQS源码解读一.md)
+- [AQS源码解读二](2-Java 并发/AQS源码解读二.md)
+- [Java中Thread类的中断状态](2-Java 并发/Java中Thread类的中断状态.md)
+- [Java中Thread类的基本方法及六种线程状态](2-Java 并发/Java中Thread类的基本方法及六种线程状态.md)
+- [Java线程上下文切换](2-Java 并发/Java线程上下文切换.md)
+- [Java线程中的Wait、Notify、中断等知识](2-Java 并发/Java线程中的wait、notify、中断等知识.md)
+- [Java锁池和等待池](2-Java 并发/Java锁池和等待池.md)
+- [Synchronized和无锁，偏向锁，轻量级锁，重量级锁的关系](2-Java 并发/synchronized和无锁，偏向锁，轻量级锁，重量级锁的关系.md)
+- [悲观锁、乐观锁、可重入锁、读写锁](2-Java 并发/悲观锁、乐观锁、可重入锁、读写锁.md)
 
 ## Java虚拟机
 
