@@ -92,5 +92,11 @@ $ mv -u foo.txt bar.txt bar # 注意：bar文件夹中也有foo.txt bar.txt文�
 
 # 移动多个文件(夹)到 某个目录  加-t即可
 mv build config test1.txt -t folder
+
+## mv 一个文件夹下的所有东西（文件、文件夹）到另一个目录时发生报错，可以换成cp复制的方式，然后删除原目录即可
+mv ./backup/* ./backupArchives
+mv: cannot move './backup/base' to './backupsArchive/base': Directory not empty
+cp -r ./backup/* ./backupArchives && rm -R ./backup/*
+
 ```
 
