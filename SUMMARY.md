@@ -45,7 +45,6 @@
 ## Java 并发
 
 - [ThreadLocal](2-Java 并发/1-ThreadLocal.md)
-- [悲观锁、乐观锁、可重入锁、读写锁](2-Java 并发/10-悲观锁、乐观锁、可重入锁、读写锁.md)
 - [并发编程的其它基础知识](2-Java 并发/2-并发编程的其它基础知识.md)
 - [Java并发包中ThreadLocalRandom类原理剖析](2-Java 并发/3-Java并发包中ThreadLocalRandom类原理剖析.md)
 - [Java并发包中原子操作类原理剖析](2-Java 并发/4-Java并发包中原子操作类原理剖析.md)
@@ -62,6 +61,7 @@
 - [Java线程中的Wait、Notify、中断等知识](2-Java 并发/Java线程中的wait、notify、中断等知识.md)
 - [Java锁池和等待池](2-Java 并发/Java锁池和等待池.md)
 - [Synchronized和无锁，偏向锁，轻量级锁，重量级锁的关系](2-Java 并发/synchronized和无锁，偏向锁，轻量级锁，重量级锁的关系.md)
+- [悲观锁、乐观锁、可重入锁、读写锁](2-Java 并发/悲观锁、乐观锁、可重入锁、读写锁.md)
 
 ## Java虚拟机
 
