@@ -100,3 +100,73 @@ cp -r ./backup/* ./backupArchives && rm -R ./backup/*
 
 ```
 
+```bash
+# ps命令 Process Status
+# 显示所有进程
+ps -A 或者 -e
+ps -f 全格式显示进程
+
+# grep命令 global regular expression print
+# grep [option] pattern file
+ps -ef | grep -f adb # 也可以加字符串，然后这个字符串作为正则匹配
+grep -f test.txt # 后面可以加文件，test.txt文件中每一行都作为正则匹配项
+
+# wc命令 wordCount
+wc testfile # 统计行数 单词数 字节数
+wc -l # 统计行数
+
+# du命令 diskUseage
+du -h # 输出当前文件夹中文件的大小，单位是M
+
+# awk命令 三个人名字的首字母 主要用于对字符串进行处理
+输入流 ｜ awk -F '=' '{print $1 $2}' # 根据‘=’等号来切割 $1 $2是切割得到的第1，2个元素
+awk '这里是脚本' 文件名 # 对文件中每一行利用脚本进行过滤，得到符合的行
+awk '$1>2 && $2=="Are" {print $1, $2}' log.txt
+awk '$1>2 && $2=="Are"' log.txt # 后面不加print就是默认输出符合脚本的整行
+
+
+# sort命令
+# uniq -c
+ls -l | sort | uniq -c | sort -k 1 -nr
+sort # 会将输入流所有行按照ascii排序
+uniq -c # 排完序之后，这个命令会合并相邻的重复行，并统计重复数；输出(前面是频率 后面是内容)：
+2 hello
+3 my
+4 thanks
+sort -k 1 # 表示按照每行的第一个字段排序 从小到大
+sort -nr # -n表示指定按照数值大小进行排序，后面加r表示逆序
+
+cat simpleLocker.txt | awk -F ' ' '{print $2}' | sort | uniq | while read line
+do
+	adb uninstall $line
+done
+
+# top命令
+top # 看当前机器中的进程状态
+uptime # 看CPU负载情况
+
+# ps命令 process status进程状态
+ps -a # 显示所有有终端控制下执行的进程
+ps -A 或者 ps -ax # 显示所有进程 无论是否运行在终端
+ps -au # 显示所有有终端控制下执行的进程的详细信息 包括CPU使用情况等等
+ps -aux # 所有进程的详细信息 无论是否运行在终端
+ps -e # 和-A效果一样 会显示所有进程的信息 但是只看得到几项信息
+ps -f # 把全部列都给显示出来，通常和其它选项联用
+ps -fe 和 ps -aux效果差不多
+ps -u root # 看root用户下的进程
+
+# uname命令 unix name 用于查看一些系统信息
+uname -a # 看内核 操作系统 CPU信息
+
+# netstat命令 显示Linux系统的网络情况
+netstat -a # 详细网络情况 哪个ip和哪个ip用哪种协议建立连接，当前连接状态是什么样的
+netstat -apu # -all protocal udp
+netstat -apt # -all protocal tcp 看tcp协议端口使用情况
+netstat -i # 显示网卡列表 就是ifconfig看到的网卡名称
+netstat -tunlp | grep 8080 # 查看端口占用情况 -tcp udp n(拒绝显示别名，全用数字显示) listen(仅列出在listen的服务) p(显示建立相关连接的process)
+kill -9 PID # 杀掉进程
+
+# lsof命令 list open files 列出当前系统打开文件的工具
+lsof -i:端口号 # 这个命令得root用户才能执行
+```
+
