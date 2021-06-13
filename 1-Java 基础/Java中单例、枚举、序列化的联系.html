@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Java中的反射 · GitBook</title>
+        <title>Java中单例、枚举、序列化的联系 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -97,10 +97,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Java中的泛型.html" />
+    <link rel="next" href="Java中序列化问题和transient关键字.html" />
     
     
-    <link rel="prev" href="Java中的代理类Proxy和InvocationHandler.html" />
+    <link rel="prev" href="Java中HashMap底层原理.html" />
     
 
     </head>
@@ -183,7 +183,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="Java中单例、枚举、序列化的联系.html">
+        <li class="chapter active" data-level="1.5" data-path="Java中单例、枚举、序列化的联系.html">
             
                 <a href="Java中单例、枚举、序列化的联系.html">
             
@@ -222,7 +222,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.8" data-path="Java中的反射.html">
+        <li class="chapter " data-level="1.8" data-path="Java中的反射.html">
             
                 <a href="Java中的反射.html">
             
@@ -1194,7 +1194,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Java中的反射</a>
+        <a href=".." >Java中单例、枚举、序列化的联系</a>
     </h1>
 </div>
 
@@ -1209,8 +1209,159 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <footer class="page-footer"><span class="copyright">Copyright &#xA9; winterliu all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2021-06-09 17:47:49
+                                <p>&#x5F00;&#x59CB;&#xFF0C;&#x6211;&#x60F3;&#x5199;&#x4E00;&#x4E2A;&#x5355;&#x4F8B;&#xFF0C;&#x53D1;&#x73B0;&#x6709;&#x997F;&#x6C49;&#x5F0F;&#x3001;&#x61D2;&#x6C49;&#x5F0F;&#xFF08;&#x6216;&#x8005;&#x52A0;&#x9501;&#x7684;&#x61D2;&#x6C49;&#x5F0F;&#xFF09;&#x3001;&#x53CC;&#x91CD;&#x6821;&#x9A8C;&#x9501;&#x7684;&#x65B9;&#x5F0F;&#x3001;&#x9759;&#x6001;&#x5185;&#x90E8;&#x7C7B;&#x7684;&#x65B9;&#x5F0F;&#xFF1B;&#x4E0A;&#x9762;&#x56DB;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x867D;&#x7136;&#x5728;&#x4E0D;&#x65AD;&#x6539;&#x8FDB;&#xFF0C;&#x907F;&#x514D;&#x4E86;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#xFF0C;&#x4F46;&#x662F;&#x4F9D;&#x65E7;&#x4E0D;&#x80FD;&#x62B5;&#x4F4F;&#x53CD;&#x5C04;&#x653B;&#x51FB;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x653B;&#x51FB;&#x3002;</p>
+<p>&#x7136;&#x540E;&#xFF0C;&#x770B;&#x5230;<code>Effective Java</code>&#x4E2D;&#x8BF4;&#x5B9E;&#x73B0;&#x5355;&#x4F8B;&#x6700;&#x597D;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x7528;&#x679A;&#x4E3E;&#xFF0C;&#x91CC;&#x9762;&#x53EA;&#x653E;&#x4E00;&#x4E2A;&#x679A;&#x4E3E;&#x9879;&#xFF0C;&#x8FD9;&#x4E2A;&#x679A;&#x4E3E;&#x7C7B;&#x4E5F;&#x5C31;&#x662F;&#x5355;&#x4F8B;&#x5BF9;&#x5E94;&#x7684;&#x7C7B;&#xFF0C;&#x5229;&#x7528;&#x679A;&#x4E3E;&#x5B9E;&#x73B0;&#x7684;&#x5E95;&#x5C42;&#x673A;&#x5236;&#x907F;&#x514D;&#x4E86;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF0C;&#x4E5F;&#x5B9E;&#x73B0;&#x4E86;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#xFF0C;&#x6700;&#x91CD;&#x8981;&#x7684;&#x679A;&#x4E3E;&#x8FD8;&#x53EF;&#x4EE5;&#x62B5;&#x4F4F;&#x53CD;&#x5C04;&#x653B;&#x51FB;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x653B;&#x51FB;&#x3002;</p>
+<blockquote>
+<p>&#x8FD9;&#x91CC;&#x7B80;&#x5355;&#x8BF4;&#x4E00;&#x4E0B;&#x679A;&#x4E3E;&#x7684;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#xFF1A;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x8BA9;&#x679A;&#x4E3E;&#x7C7B;&#x81EA;&#x52A8;&#x7EE7;&#x627F;java.lang.Enum&#x7C7B;&#xFF0C;&#x91CC;&#x9762;&#x7684;&#x679A;&#x4E3E;&#x9879;&#x5176;&#x5B9E;&#x662F;&#x679A;&#x4E3E;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#xFF08;static final&#x7C7B;&#x578B;&#xFF09;&#xFF0C;&#x800C;&#x4E14;&#x53EA;&#x5728;&#x7B2C;&#x4E00;&#x6B21;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x679A;&#x4E3E;&#x7C7B;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x521D;&#x59CB;&#x5316;&#x6240;&#x6709;&#x679A;&#x4E3E;&#x9879;&#x5B9E;&#x4F8B;&#xFF08;&#x8FD9;&#x91CC;&#x8BF4;&#x660E;&#x907F;&#x514D;&#x4E86;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x95EE;&#x9898;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#xFF09;&#x3002;</p>
+<p>&#x518D;&#x8BF4;&#x4E00;&#x4E0B;&#x666E;&#x901A;&#x7684;&#x7C7B;&#x8981;&#x5B9E;&#x73B0;&#x5355;&#x4F8B;&#xFF0C;&#x600E;&#x4E48;&#x62B5;&#x4F4F;&#x53CD;&#x5C04;&#x653B;&#x51FB;&#x5462;&#xFF1A;&#x53EA;&#x8981;&#x5728;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x91CC;&#x9762;&#x5224;&#x65AD;&#x662F;&#x5426;&#x662F;&#x7B2C;&#x4E8C;&#x6B21;&#x6784;&#x9020;&#xFF0C;&#x662F;&#x7684;&#x8BDD;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x653B;&#x51FB;&#x5462;&#xFF1A;&#x53EA;&#x8981;&#x5728;&#x5355;&#x4F8B;&#x7C7B;&#x4E2D;&#x5199;&#x4E00;&#x4E2A;public Object readResolve(){...&#x8FD9;&#x91CC;&#x662F;&#x65B9;&#x6CD5;&#x4E2D;&#x8981;&#x505A;&#x5230;&#x4E8B;} &#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x6267;&#x884C;readObject(fileInputStream)&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4E2D;&#x4F1A;&#x53BB;&#x770B;&#x4F60;&#x5F53;&#x524D;&#x7C7B;&#x4E2D;&#x6709;&#x6CA1;&#x6709;&#x4E00;&#x4E2A;&#x53EB;&#x505A;readResolve()&#x7684;&#x65B9;&#x6CD5;&#xFF08;&#x6CE8;&#x610F;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5FC5;&#x987B;&#x662F;Object&#xFF0C;&#x5426;&#x5219;&#x53CD;&#x5C04;&#x4E0D;&#x5230;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x8BDD;readObject()&#x8FD4;&#x56DE;&#x7684;&#x5C31;&#x662F;readResolve()&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;obj&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5355;&#x4F8B;&#x7C7B;&#x4E2D;&#x4F60;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;public Object readResolve()&#x65B9;&#x6CD5;&#xFF0C;&#x90A3;readObject()&#x5C31;&#x4F1A;&#x4ECE;&#x6D41;&#x91CC;&#x9762;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x586B;&#x5145;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5355;&#x4F8B;&#x7C7B;&#x5BF9;&#x8C61;&#x4E2D;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x8FD9;&#x4E2A;&#x65B0;&#x7684;&#x5355;&#x4F8B;&#x7C7B;&#x5BF9;&#x8C61;&#x3002;&#x8FD9;&#x5C31;&#x8FDD;&#x53CD;&#x4E86;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x7684;&#x539F;&#x5219;&#xFF1A;&#x5728;JVM&#x4E2D;&#x53EA;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;</p>
+<p>// &#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#x53C2;&#x8003;&#xFF1A;<a href="https://juejin.cn/post/6844904142402486285" target="_blank">https://juejin.cn/post/6844904142402486285</a></p>
+<p>&#x8FD9;&#x91CC;&#x8BE6;&#x7EC6;&#x8BF4;&#x4E00;&#x4E0B;&#x5728;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x65F6;&#x5019;readObject()&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x5E72;&#x4E86;&#x4EC0;&#x4E48;&#xFF08;&#x8BB0;&#x4F4F;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x662F;&#x8981;&#x8FD4;&#x56DE;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x5F97;&#x5230;&#x7684;&#x5BF9;&#x8C61;&#xFF09;&#xFF1A;</p>
+<ol>
+<li><p>&#x8C03;&#x7528;readObject0()&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x91CC;&#x9762;&#x7528;switch(tc) case&#x770B;&#x5F53;&#x524D;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x662F;&#x4EC0;&#x4E48;&#x7C7B;&#x578B;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;&#x666E;&#x901A;&#x7684;OBJECT&#x7C7B;&#x578B;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">case</span> TC_ENUM:
+    <span class="hljs-keyword">return</span> checkResolve(readEnum(unshared));
+
+<span class="hljs-keyword">case</span> TC_OBJECT:
+    <span class="hljs-keyword">return</span> checkResolve(readOrdinaryObject(unshared));
+</code></pre>
+</li>
+<li><p>&#x8C03;&#x7528;checkResolve(readOrdinaryObject(unshared))&#xFF1A;</p>
+<p>&#x5176;&#x4E2D;checkResolve()&#x53C2;&#x6570;&#x662F;readOrdinaryObject()&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;obj&#x5BF9;&#x8C61;&#xFF0C;checkResolve&#x4E3B;&#x8981;&#x662F;&#x5BF9;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x68C0;&#x67E5;&#xFF0C;&#x6CA1;&#x95EE;&#x9898;&#x5C31;&#x8FD4;&#x56DE;&#x8FD9;&#x4E2A;obj&#x5BF9;&#x8C61;&#x4E86;&#x3002;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x8981;&#x8FD4;&#x56DE;&#x7684;obj&#x5BF9;&#x8C61;&#x54EA;&#x91CC;new&#x51FA;&#x6765;&#x5E76;&#x4E14;&#x586B;&#x5145;fileInputStream&#x6D41;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x7684;&#x5462;&#xFF1F;</p>
+</li>
+<li><p>&#x8FD9;&#x5C31;&#x770B;readOrdinaryObject()&#x65B9;&#x6CD5;&#xFF1A;&#x5728;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4E2D;obj&#x5148;&#x88AB;new&#x51FA;&#x6765;</p>
+<pre><code class="lang-java">Object obj;
+<span class="hljs-keyword">try</span> {
+    obj = desc.isInstantiable() ? desc.newInstance() : <span class="hljs-keyword">null</span>;
+} <span class="hljs-keyword">catch</span> (Exception ex) {
+    <span class="hljs-keyword">throw</span> (IOException) <span class="hljs-keyword">new</span> InvalidClassException(
+        desc.forClass().getName(),
+        <span class="hljs-string">&quot;unable to create instance&quot;</span>).initCause(ex);
+}
+</code></pre>
+<p>&#x8FD9;&#x91CC;desc.isInstantiable()&#x4E00;&#x5B9A;&#x662F;true&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;desc.newInstance()&#x4E00;&#x5B9A;&#x4F1A;new&#x4E00;&#x4E2A;&#x5355;&#x4F8B;&#x7C7B;&#x5B9E;&#x4F8B;&#xFF08;&#x5177;&#x4F53;&#x6765;&#x8BF4;&#xFF1A;&#x5728;desc.newInstance()&#x4E2D;&#x901A;&#x8FC7;<code>cons = getSerializableConstructor(cl);</code>&#x8FD9;&#x4E00;&#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x7528;&#x5355;&#x4F8B;&#x7C7B;&#x7684;Class&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x62FF;&#x5230;&#x5355;&#x4F8B;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x5668;&#xFF0C;&#x4ECE;&#x800C;new&#x4E00;&#x4E2A;&#x5355;&#x4F8B;&#x7C7B;&#x5B9E;&#x4F8B;&#xFF09;&#x3002;</p>
+</li>
+<li><p>&#x62FF;&#x5230;&#x4E00;&#x4E2A;&#x521A;new&#x51FA;&#x6765;&#x7684;&#x5355;&#x4F8B;&#x7C7B;&#x5B9E;&#x4F8B;&#x8FD8;&#x4E0D;&#x591F;&#x554A;&#xFF0C;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x505A;&#x7684;&#x662F;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5F97;&#x628A;&#x6D41;&#x4E2D;&#x8BFB;&#x53D6;&#x5230;&#x7684;&#x6570;&#x636E;&#x586B;&#x5145;&#x5230;new&#x51FA;&#x6765;&#x7684;&#x5355;&#x4F8B;&#x7C7B;&#x5B9E;&#x4F8B;&#x4E2D;&#x3002;&#x8FD8;&#x662F;&#x5728;readOrdinaryObject()&#x65B9;&#x6CD5;&#x4E2D;&#xFF0C;obj&#x88AB;new&#x5B8C;&#x4E4B;&#x540E;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">if</span> (desc.isExternalizable()) {
+    readExternalData((Externalizable) obj, desc);
+} <span class="hljs-keyword">else</span> {
+    readSerialData(obj, desc); <span class="hljs-comment">// &#x5927;&#x591A;&#x6570;&#x4F1A;&#x6267;&#x884C;&#x8FD9;&#x4E00;&#x884C;&#xFF0C;</span>
+}
+</code></pre>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x88AB;new&#x5B8C;&#x4E4B;&#x540E;&#x5176;&#x5B9E;<strong>&#x5E76;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x770B;</strong>&#x6709;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;public Object readResolve()&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x662F;&#x5148;&#x6267;&#x884C;readSerialData(obj, desc)&#x8FD9;&#x4E00;&#x884C;&#xFF0C;&#x5C06;&#x6D41;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x586B;&#x5145;&#x5230;&#x521A;new&#x51FA;&#x6765;&#x7684;&#x5355;&#x4F8B;&#x7C7B;&#x5B9E;&#x4F8B;&#x4E2D;&#xFF08;&#x8FD9;&#x4E2A;desc&#x662F;&#x4EC0;&#x4E48;&#x7C7B;&#x578B;&#x5462;&#xFF1F;&#x5B83;&#x5176;&#x5B9E;&#x662F;&#x4E00;&#x4E2A;ObjectStreamClass&#x7C7B;&#xFF0C;Java&#x91CC;&#x9762;&#x4E07;&#x7269;&#x7686;&#x5BF9;&#x8C61;&#xFF0C;&#x5176;&#x5B9E;&#x662F;&#x628A;&#x6D41;&#x91CC;&#x9762;&#x7684;filed&#x62BD;&#x8C61;&#x5230;&#x8FD9;&#x4E2A;ObjectStreamClass&#x7C7B;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;desc&#x91CC;&#x9762;&#x5C31;&#x6709;&#x6D41;&#x4E2D;&#x7684;&#x5404;&#x4E2A;field&#x7684;&#x6570;&#x636E; &#x5C31;&#x53EF;&#x4EE5;&#x586B;&#x5145;&#x5230;obj&#x5BF9;&#x8C61;&#x4E86;&#xFF09;&#xFF0C;&#x8BE6;&#x7EC6;&#x5185;&#x5BB9;&#x5728;ObjectInputStream&#x7C7B;&#x4E2D;readSerialData()&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x586B;&#x5145;&#x5B8C;&#x6570;&#x636E;&#x4E4B;&#x540E;&#x624D;&#x4F1A;&#x8C03;&#x7528;desc.hasReadResolveMethod()&#x770B;&#x5355;&#x4F8B;&#x7C7B;&#x4E2D;&#x6709;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;readResolve()&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">if</span> (obj != <span class="hljs-keyword">null</span> &amp;&amp;
+    handles.lookupException(passHandle) == <span class="hljs-keyword">null</span> &amp;&amp;
+    desc.hasReadResolveMethod())
+{
+    <span class="hljs-comment">// &#x4E0B;&#x9762;&#x8FD9;&#x4E00;&#x884C;&#x662F;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x8C03;&#x7528;readResolve()&#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x628A;&#x8FD4;&#x56DE;&#x503C;&#x653E;&#x5230;rep</span>
+    Object rep = desc.invokeReadResolve(obj);
+    <span class="hljs-keyword">if</span> (unshared &amp;&amp; rep.getClass().isArray()) {
+        rep = cloneArray(rep);
+    }
+    <span class="hljs-comment">//&#x3002;&#x3002;&#x3002;&#x3002;</span>
+}
+</code></pre>
+<p>desc.hasReadResolveMethod()&#x600E;&#x4E48;&#x77E5;&#x9053;&#x4F60;&#x6709;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;readResolve()&#x65B9;&#x6CD5;&#x5462;&#xFF1F;&#x5230;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x91CC;&#x9762;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">hasReadResolveMethod</span><span class="hljs-params">()</span> </span>{
+    requireInitialized();
+    <span class="hljs-keyword">return</span> (readResolveMethod != <span class="hljs-keyword">null</span>);
+}
+</code></pre>
+<p>&#x5176;&#x4E2D;readResolveMethod&#x662F;Method&#x7C7B;&#xFF0C;&#x90A3;readResolveMethod&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x521D;&#x59CB;&#x5316;&#x7684;&#x5462;&#xFF1A;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5728;ObjectStreamClass&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x91CC;&#x9762;&#xFF08;&#x8BF4;&#x660E;&#x5728;desc&#x88AB;new&#x51FA;&#x6765;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x7ED9;Method&#x7C7B;&#x578B;&#x7684;readResolveMethod&#x5B8C;&#x6210;&#x521D;&#x59CB;&#x5316;&#xFF09;&#xFF0C;&#x901A;&#x8FC7;&#x53CD;&#x5C04;&#x83B7;&#x5F97;&#x7C7B;&#x540D;cl&#x4E2D;&#x6709;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x662F;Object.class&#x7684;readResolve()&#x65B9;&#x6CD5;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-comment">/**
+ * Creates local class descriptor representing given class.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">ObjectStreamClass</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Class&lt;?&gt; cl)</span> </span>{
+    readResolveMethod = getInheritableMethod(
+                        cl, <span class="hljs-string">&quot;readResolve&quot;</span>, <span class="hljs-keyword">null</span>, Object.class);
+</code></pre>
+<p>&#x8FD9;&#x91CC;&#x518D;&#x8BF4;&#x4E00;&#x4E0B;desc:&#x5B83;&#x662F;ObjectStreamClass&#x7C7B;&#x578B;&#xFF0C;&#x5B83;&#x91CC;&#x9762;&#x6709;&#x4F60;&#x8981;&#x5199;&#x6210;&#x7684;Object&#x7684;Class&#x5BF9;&#x8C61;&#xFF0C;&#x4E5F;&#x6709;&#x6D41;&#x4E2D;&#x7684;field&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-comment">// 1. desc&#x4ECE;&#x54EA;&#x91CC;&#x6765;&#xFF1A;&#x5728;readOrdinaryObject()&#x65B9;&#x6CD5;&#x4E2D;</span>
+ObjectStreamClass desc = readClassDesc(<span class="hljs-keyword">false</span>);
+<span class="hljs-comment">// 2. &#x518D;&#x770B;readClassDesc()&#x65B9;&#x6CD5;&#x4E2D;&#x6709;&#xFF1A;&#xFF08;&#x5982;&#x679C;&#x5F53;&#x524D;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684;Object&#x8FDB;&#x884C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#xFF09;</span>
+<span class="hljs-keyword">case</span> TC_CLASSDESC:
+                descriptor = readNonProxyDesc(unshared);
+<span class="hljs-comment">// 3. &#x518D;&#x770B;readNonProxyDesc(unshared)&#x65B9;&#x6CD5;&#x4E2D;&#x6709;&#xFF1A;</span>
+ObjectStreamClass desc = <span class="hljs-keyword">new</span> ObjectStreamClass(); <span class="hljs-comment">// &#x771F;&#x9762;&#x76EE;&#x7EC8;&#x4E8E;&#x51FA;&#x73B0;&#x4E86;</span>
+<span class="hljs-comment">// &#x7136;&#x540E;&#x4E0B;&#x9762;&#x662F;&#x5BF9;desc&#x7684;&#x5404;&#x9879;&#x6570;&#x636E;&#x521D;&#x59CB;&#x5316;&#x8D4B;&#x503C;</span>
+desc.initNonProxy(readDesc, cl, resolveEx, readClassDesc(<span class="hljs-keyword">false</span>));
+<span class="hljs-comment">// &#x5230;&#x6B64;&#xFF0C;&#x5C31;&#x6709;&#x4E86;&#x586B;&#x5145;&#x4E86;&#x6570;&#x636E;&#x7684;desc&#x4E86;&#xFF1B;&#x81F3;&#x4E8E;initNonProxy&#x65B9;&#x6CD5;&#x7684;&#x5404;&#x9879;&#x53C2;&#x6570;&#x5C31;&#x4E0D;&#x7EC6;&#x8BF4;&#x4E86;:)</span>
+</code></pre>
+<p>&#x770B;&#x5B8C;&#x6709;&#x6CA1;&#x6709;readResolve()&#x65B9;&#x6CD5;&#x4E4B;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#x90A3;&#x6211;&#x4EEC;&#x5C31;&#x62FF;&#x5230;readResolve()&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;Object&#x7C7B;&#x578B;&#x5BF9;&#x8C61;rep&#x4E86;&#xFF0C;&#x90A3;&#x73B0;&#x5728;&#x6709;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#x4E86;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x4E4B;&#x524D;&#x6B63;&#x5E38;&#x4ECE;&#x6D41;&#x4E2D;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x5F97;&#x5230;&#x7684;obj&#x5BF9;&#x8C61;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x521A;&#x4ECE;eadResolve()&#x65B9;&#x6CD5;&#x5F97;&#x5230;&#x7684;rep&#x5BF9;&#x8C61;&#xFF0C;&#x90A3;&#x6700;&#x7EC8;readOrdinaryObject()&#x4F1A;&#x8FD4;&#x56DE;&#x54EA;&#x4E2A;&#x5BF9;&#x8C61;&#x5462;&#xFF1F;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">if</span> (rep != obj) {
+    <span class="hljs-comment">// Filter the replacement object</span>
+    <span class="hljs-keyword">if</span> (rep != <span class="hljs-keyword">null</span>) {
+        <span class="hljs-keyword">if</span> (rep.getClass().isArray()) {
+            filterCheck(rep.getClass(), Array.getLength(rep));
+        } <span class="hljs-keyword">else</span> {
+            filterCheck(rep.getClass(), -<span class="hljs-number">1</span>);
+        }
+    }
+    handles.setObject(passHandle, obj = rep); <span class="hljs-comment">// &#x770B;&#x8FD9;&#x91CC;</span>
+}
+</code></pre>
+<p>&#x5F53;rep&#x548C;&#x4E4B;&#x524D;&#x7684;obj&#x4E0D;&#x4E00;&#x6837;&#x65F6;&#xFF0C;&#x4F1A;&#x6267;&#x884C;&#x4E0A;&#x9762;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x4E2D;&#x95F4;&#x90FD;&#x662F;&#x4E00;&#x4E9B;check&#xFF0C;&#x770B;&#x8FD9;&#x4E00;&#x884C;&#xFF1A;handles.setObject(passHandle, obj = rep)&#xFF0C;&#x8BF4;&#x660E;&#x4F1A;&#x628A;obj&#x6307;&#x5411;rep&#x3002;</p>
+<p><strong>&#x6700;&#x7EC8;&#x7ED3;&#x8BBA;</strong>&#xFF1A;&#x8BF4;&#x660E;&#x5F53;&#x6211;&#x4EEC;&#x5728;&#x5355;&#x4F8B;&#x7C7B;&#x4E2D;&#x5B9A;&#x4E49;&#x4E86;&#x8FD4;&#x56DE;&#x503C;&#x65F6;Object&#x7C7B;&#x578B;&#x7684;readResolve()&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;&#x4E0B;&#x9762;&#x7684;readObject()&#x4F1A;&#x8FD4;&#x56DE;readResolve()&#x4E2D;&#x8FD4;&#x56DE;&#x7684;Object&#x5BF9;&#x8C61;&#x3002;</p>
+<pre><code class="lang-java">SingletonModel singletonModel1 = (SingletonModel) objectInputStream.readObject();
+</code></pre>
+</li>
+</ol>
+</blockquote>
+<p>&#x4E0A;&#x9762;&#x63A2;&#x7A76;&#x4E86;&#x4E00;&#x4E0B;&#x666E;&#x901A;&#x7C7B;&#x5982;&#x4F55;&#x907F;&#x514D;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x653B;&#x51FB;&#xFF08;&#x6CE8;&#x610F;&#x666E;&#x901A;&#x7C7B;&#x8FD8;&#x9700;&#x8981;&#x624B;&#x52A8;&#x52A0;implements Serializable&#x63A5;&#x53E3;&#xFF0C;&#x53EA;&#x8981;&#x5B9E;&#x73B0;&#x4E86;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;ObjectInputStream&#x548C;ObjectOutputStream&#x4E24;&#x4E2A;&#x5BF9;&#x6D41;&#x64CD;&#x4F5C;&#x7684;&#x7C7B;&#x4F1A;&#x81EA;&#x52A8;&#x5BF9;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x7684;&#x7C7B;&#x8FDB;&#x884C;&#x5E8F;&#x5217;&#x5316;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x64CD;&#x4F5C;&#xFF09;&#x3002;&#x4E0B;&#x9762;&#x770B;&#x770B;&#x679A;&#x4E3E;&#x5E95;&#x5C42;&#x673A;&#x5236;&#x662F;&#x5982;&#x4F55;&#x907F;&#x514D;&#x53CD;&#x5C04;&#x653B;&#x51FB;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x653B;&#x51FB;&#x7684;&#xFF1A;</p>
+<p>1.&#x5982;&#x4F55;&#x907F;&#x514D;&#x53CD;&#x5C04;&#x653B;&#x51FB;&#xFF1A;&#x5BF9;&#x4E8E;&#x679A;&#x4E3E;&#x6765;&#x8BF4;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x62FF;&#x5230;&#x679A;&#x4E3E;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x5668;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x5F53;&#x6784;&#x9020;&#x5668;&#x5BF9;&#x8C61;newInstance()&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">if</span> ((clazz.getModifiers() &amp; Modifier.ENUM) != <span class="hljs-number">0</span>)
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Cannot reflectively create enum objects&quot;</span>);
+</code></pre>
+<p>2.&#x5982;&#x4F55;&#x907F;&#x514D;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x653B;&#x51FB;&#xFF0C;&#x8FD9;&#x5C31;&#x6D89;&#x53CA;&#x5230;&#x679A;&#x4E3E;&#x7684;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x95EE;&#x9898;&#x4E86;&#xFF1A;</p>
+<p>&#x5BF9;&#x4E8E;&#x666E;&#x901A;&#x7684;&#x7C7B;&#xFF0C;&#x5B9E;&#x73B0;Serializable&#x63A5;&#x53E3;&#x6765;&#x5B9E;&#x73B0;&#x5E8F;&#x5217;&#x5316;&#xFF0C;&#x901A;&#x8FC7;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x4F1A;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x679C;&#x7528;&#x666E;&#x901A;&#x7684;&#x5B9E;&#x73B0;&#x4E86;Serializable&#x63A5;&#x53E3;&#x7684;&#x7C7B;&#x6765;&#x7528;&#x4F5C;&#x5355;&#x4F8B;&#x7C7B;&#xFF0C;&#x5C31;&#x4E0D;&#x518D;&#x662F;&#x5355;&#x4F8B;&#x4E86;&#x3002;&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x679A;&#x4E3E;&#x7C7B;&#x578B;&#x50CF;Java&#x89C4;&#x8303;&#x4E2D;&#x6240;&#x8BF4;&#x7684;&#xFF1A;&#x5728;JVM&#x4E2D;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x679A;&#x4E3E;&#x7C7B;&#x5BF9;&#x8C61;&#x53CA;&#x679A;&#x4E3E;&#x9879;&#x5BF9;&#x8C61;&#x90FD;&#x662F;&#x552F;&#x4E00;&#x7684;&#xFF0C;&#x5728;&#x9488;&#x5BF9;&#x679A;&#x4E3E;&#x7C7B;&#x578B;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x4E0A;&#xFF0C;Java&#x505A;&#x4E86;&#x7279;&#x6B8A;&#x7684;&#x7EA6;&#x5B9A;&#xFF1A;</p>
+<ol>
+<li>&#x679A;&#x4E3E;&#x9879;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x4E0D;&#x540C;&#x4E8E;&#x5176;&#x5B83;&#x666E;&#x901A;&#x7684;Object&#x7684;&#x5E8F;&#x5217;&#x5316;&#x3002;</li>
+<li>&#x679A;&#x4E3E;&#x9879;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x4EC5;&#x4EC5;&#x4F1A;&#x5BF9;&#x5B83;&#x7684;name&#x5C5E;&#x6027;&#x8FDB;&#x884C;&#x5E8F;&#x5217;&#x5316;&#xFF0C;&#x679A;&#x4E3E;&#x9879;&#x7684;field values&#x4E0D;&#x4F1A;&#x88AB;&#x5E8F;&#x5217;&#x5316;&#x3002;</li>
+<li>&#x5E8F;&#x5217;&#x5316;&#x679A;&#x4E3E;&#x9879;&#xFF1A;ObjectOutputStream writes the value returned by the enum constant&apos;s name method</li>
+<li>&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x679A;&#x4E3E;&#x9879;&#xFF1A;ObjectInputStream reads the constant name from the stream; &#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x65F6;&#x5019;&#x901A;&#x8FC7;java.lang.Enum&#x7684;valueOf&#x65B9;&#x6CD5;&#x901A;&#x8FC7;&#x4F20;&#x5165;enumType&#x548C;name&#x5C5E;&#x6027;&#x503C;&#x5F97;&#x5230;&#x679A;&#x4E3E;&#x9879;&#x5BF9;&#x8C61;&#x3002;</li>
+</ol>
+<p>&#x603B;&#x7ED3;&#x4E00;&#x70B9;&#xFF1A;&#x5728;&#x7F16;&#x8BD1;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x4E3A;&#x6BCF;&#x4E2A;&#x679A;&#x4E3E;&#x7C7B;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x4E00;&#x4E2A;values()&#x65B9;&#x6CD5;&#xFF0C;&#x800C;&#x4E14;&#x5E38;&#x91CF;&#x6C60;&#x4E2D;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x679A;&#x4E3E;&#x9879;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x7EC4; &#x6BD4;&#x5982;Season[]&#xFF0C;&#x5F53;&#x9996;&#x6B21;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x679A;&#x4E3E;&#x7C7B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6BD4;&#x5982;&#x7528;&#x5230;&#x8FD9;&#x4E2A;Season&#x679A;&#x4E3E;&#x7C7B;&#xFF0C;&#x4F1A;&#x628A;SPRING, SUMMER...&#x8FD9;&#x4E9B;&#x679A;&#x4E3E;&#x9879;&#x81EA;&#x52A8;&#x586B;&#x5145;&#x5230;Season&#x6570;&#x7EC4;&#xFF0C;&#x800C;values&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x7684;&#x5C31;&#x662F;&#x8FD9;&#x4E2A;Season[]&#x6570;&#x7EC4;&#x3002;</p>
+<p>&#x5728;readObject0()&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x662F;Enum&#x5BF9;&#x8C61;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">case</span> TC_ENUM:
+    <span class="hljs-keyword">return</span> checkResolve(readEnum(unshared));
+</code></pre>
+<p>&#x8FDB;&#x5165;readEnum()&#x65B9;&#x6CD5;&#xFF1A;&#x5B83;&#x4F1A;&#x8BFB;&#x53D6;&#x6D41;&#x4E2D;&#x7684;name&#x5C5E;&#x6027;&#x503C;&#xFF0C;&#x518D;&#x5229;&#x7528;Enum.valueOf(cl, name)&#x5F97;&#x5230;&#x67D0;&#x4E00;&#x4E2A;&#x679A;&#x4E3E;&#x7C7B;&#x4E2D;&#x7684;&#x679A;&#x4E3E;&#x9879;&#x5BF9;&#x8C61;&#x3002;</p>
+<pre><code class="lang-java">String name = readString(<span class="hljs-keyword">false</span>);
+Enum&lt;?&gt; result = <span class="hljs-keyword">null</span>;
+Class&lt;?&gt; cl = desc.forClass();
+<span class="hljs-keyword">if</span> (cl != <span class="hljs-keyword">null</span>) {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">&quot;unchecked&quot;</span>)
+        Enum&lt;?&gt; en = Enum.valueOf((Class)cl, name);
+        result = en;
+    } <span class="hljs-keyword">catch</span> (IllegalArgumentException ex) {
+        <span class="hljs-keyword">throw</span> (IOException) <span class="hljs-keyword">new</span> InvalidObjectException(
+            <span class="hljs-string">&quot;enum constant &quot;</span> + name + <span class="hljs-string">&quot; does not exist in &quot;</span> +
+            cl).initCause(ex);
+    }
+    <span class="hljs-keyword">if</span> (!unshared) {
+        handles.setObject(enumHandle, result);
+    }
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x518D;&#x8FDB;&#x5165;valueOf(class, name)&#xFF1A;&#x901A;&#x8FC7;&#x679A;&#x4E3E;&#x7C7B;.enumConstantDirectory()&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x4E00;&#x4E2A;Map<string, t="">&#xFF0C;key&#x662F;&#x679A;&#x4E3E;&#x9879;&#x7684;name&#xFF0C;value&#x662F;&#x679A;&#x4E3E;&#x9879;&#x5BF9;&#x8C61;&#x3002;&#x90A3;&#x8FD9;&#x4E2A;map&#x91CC;&#x9762;&#x7684;&#x6570;&#x636E;&#x54EA;&#x91CC;&#x6765;&#x7684;&#x5462;&#xFF1F;&#x5176;&#x5B9E;enumConstantDirectory()&#x51FD;&#x6570;&#x4E2D;&#x5C31;&#x662F;&#x8C03;&#x7528;&#x7F16;&#x8BD1;&#x5668;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684;value()&#x65B9;&#x6CD5;&#x62FF;&#x5230;&#x679A;&#x4E3E;&#x9879;&#x6570;&#x7EC4; &#x6BD4;&#x5982;Season[]&#xFF0C;&#x7136;&#x540E;&#x6784;&#x9020;&#x4E00;&#x4E2A;map&#x3002;</string,></p>
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T extends Enum&lt;T&gt;&gt; <span class="hljs-function">T <span class="hljs-title">valueOf</span><span class="hljs-params">(Class&lt;T&gt; enumType,
+                                            String name)</span> </span>{
+    T result = enumType.enumConstantDirectory().get(name);
+    <span class="hljs-keyword">if</span> (result != <span class="hljs-keyword">null</span>)
+        <span class="hljs-keyword">return</span> result;
+    <span class="hljs-keyword">if</span> (name == <span class="hljs-keyword">null</span>)
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException(<span class="hljs-string">&quot;Name is null&quot;</span>);
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(
+        <span class="hljs-string">&quot;No enum constant &quot;</span> + enumType.getCanonicalName() + <span class="hljs-string">&quot;.&quot;</span> + name);
+}
+</code></pre>
+<p>&#x53C2;&#x8003;&#xFF1A;</p>
+<p><a href="https://juejin.cn/post/6844904142402486285" target="_blank">&#x666E;&#x901A;&#x7C7B;&#x4E3A;&#x4EC0;&#x4E48;&#x52A0;&#x4E86;readResolve()&#x65B9;&#x6CD5;&#x5C31;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x5355;&#x4F8B;&#x7684;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x653B;&#x51FB;&#xFF1F;</a></p>
+<p><a href="https://www.jianshu.com/p/d3d797c3cd45" target="_blank">&#x679A;&#x4E3E;&#x5E8F;&#x5217;&#x5316;</a> </p>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; winterliu all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2021-06-04 09:47:10
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -1239,12 +1390,12 @@
 
             
                 
-                <a href="Java中的代理类Proxy和InvocationHandler.html" class="navigation navigation-prev " aria-label="Previous page: Java中的代理类Proxy和InvocationHandler">
+                <a href="Java中HashMap底层原理.html" class="navigation navigation-prev " aria-label="Previous page: Java中HashMap底层原理">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Java中的泛型.html" class="navigation navigation-next " aria-label="Next page: Java中的泛型">
+                <a href="Java中序列化问题和transient关键字.html" class="navigation navigation-next " aria-label="Next page: Java中序列化问题和Transient关键字">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1255,7 +1406,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java中的反射","level":"1.8","depth":1,"next":{"title":"Java中的泛型","level":"1.9","depth":1,"path":"1-Java 基础/Java中的泛型.md","ref":"1-Java 基础/Java中的泛型.md","articles":[]},"previous":{"title":"Java中的代理类Proxy和InvocationHandler","level":"1.7","depth":1,"path":"1-Java 基础/Java中的代理类Proxy和InvocationHandler.md","ref":"1-Java 基础/Java中的代理类Proxy和InvocationHandler.md","articles":[]},"dir":"neutral"},"config":{"plugins":["back-to-top-button","code","splitter","-lunr","-search","search-pro","insert-logo","popup","-sharing","sharing-plus","chapter-fold","custom-favicon","pageview-count","tbfed-pagefooter","advanced-emoji","summary","toggle-chapters","theme-comscore"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy winterliu","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"summary":{},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"favicon.ico","theme-comscore":{},"back-to-top-button":{},"pageview-count":{},"custom-favicon":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"qq":true,"qzone":true,"weibo":true,"all":["douban","weibo","qq","qzone"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{},"insert-logo":{"style":"background: none; max-height: 50px; min-height: 50px;border-radius: 50%","url":"https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/avatar.JPG"}},"dependencies":{"gitbook-plugin-summary":"^1.1.0"},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"1-Java 基础/Java中的反射.md","mtime":"2021-06-09T09:47:49.424Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-13T12:08:22.493Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Java中单例、枚举、序列化的联系","level":"1.5","depth":1,"next":{"title":"Java中序列化问题和Transient关键字","level":"1.6","depth":1,"path":"1-Java 基础/Java中序列化问题和transient关键字.md","ref":"1-Java 基础/Java中序列化问题和transient关键字.md","articles":[]},"previous":{"title":"Java中HashMap底层原理","level":"1.4","depth":1,"path":"1-Java 基础/Java中HashMap底层原理.md","ref":"1-Java 基础/Java中HashMap底层原理.md","articles":[]},"dir":"ltr"},"config":{"plugins":["back-to-top-button","code","splitter","-lunr","-search","search-pro","insert-logo","popup","-sharing","sharing-plus","chapter-fold","custom-favicon","pageview-count","tbfed-pagefooter","advanced-emoji","summary","toggle-chapters","theme-comscore"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy winterliu","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"summary":{},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"favicon.ico","theme-comscore":{},"back-to-top-button":{},"pageview-count":{},"custom-favicon":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"qq":true,"qzone":true,"weibo":true,"all":["douban","weibo","qq","qzone"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{},"insert-logo":{"style":"background: none; max-height: 50px; min-height: 50px;border-radius: 50%","url":"https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/avatar.JPG"}},"dependencies":{"gitbook-plugin-summary":"^1.1.0"},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"1-Java 基础/Java中单例、枚举、序列化的联系.md","mtime":"2021-06-04T01:47:10.322Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-13T12:08:22.493Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

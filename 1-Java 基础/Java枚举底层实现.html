@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Java中的反射 · GitBook</title>
+        <title>Java枚举底层实现 · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -97,10 +97,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="Java中的泛型.html" />
+    <link rel="next" href="Java特性-封装继承多态.html" />
     
     
-    <link rel="prev" href="Java中的代理类Proxy和InvocationHandler.html" />
+    <link rel="prev" href="Java数组底层实现原理.html" />
     
 
     </head>
@@ -222,7 +222,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.8" data-path="Java中的反射.html">
+        <li class="chapter " data-level="1.8" data-path="Java中的反射.html">
             
                 <a href="Java中的反射.html">
             
@@ -326,7 +326,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.16" data-path="Java枚举底层实现.html">
+        <li class="chapter active" data-level="1.16" data-path="Java枚举底层实现.html">
             
                 <a href="Java枚举底层实现.html">
             
@@ -1194,7 +1194,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Java中的反射</a>
+        <a href=".." >Java枚举底层实现</a>
     </h1>
 </div>
 
@@ -1209,8 +1209,207 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <footer class="page-footer"><span class="copyright">Copyright &#xA9; winterliu all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
-2021-06-09 17:47:49
+                                <p>&#x679A;&#x4E3E;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">enum</span> Season{
+    aaa,
+    bbb,
+    ccc,
+    ddd
+}
+</code></pre>
+<p>&#x7F16;&#x8BD1;&#x4E4B;&#x540E;&#x7684;class&#x6587;&#x4EF6;&#x7528;javap -v Season.class&#x547D;&#x4EE4;&#x67E5;&#x770B;&#xFF1A;</p>
+<pre><code class="lang-java">&#x8B66;&#x544A;: &#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;Season&#x5305;&#x542B;javaBasic.Season
+Classfile /Users/liuwentao/githubRepo/Code/JavaSE_Practice/src/javaBasic/Season.class
+  Last modified 2021-5-25; size 914 bytes
+  MD5 checksum 18210985803665e62859c37166b03a17
+  Compiled from &quot;MyEnum.java&quot;
+final class javaBasic.Season extends java.lang.Enum&lt;javaBasic.Season&gt;
+  minor version: 0
+  major version: 52
+  flags: ACC_FINAL, ACC_SUPER, ACC_ENUM
+Constant pool:
+   #1 = Fieldref           #4.#38         // javaBasic/Season.$VALUES:[LjavaBasic/Season;
+   #2 = Methodref          #39.#40        // &quot;[LjavaBasic/Season;&quot;.clone:()Ljava/lang/Object;
+   #3 = Class              #23            // &quot;[LjavaBasic/Season;&quot;
+   #4 = Class              #41            // javaBasic/Season
+   #5 = Methodref          #16.#42        // java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+   #6 = Methodref          #16.#43        // java/lang/Enum.&quot;&lt;init&gt;&quot;:(Ljava/lang/String;I)V
+   #7 = String             #17            // aaa
+   #8 = Methodref          #4.#43         // javaBasic/Season.&quot;&lt;init&gt;&quot;:(Ljava/lang/String;I)V
+   #9 = Fieldref           #4.#44         // javaBasic/Season.aaa:LjavaBasic/Season;
+  #10 = String             #19            // bbb
+  #11 = Fieldref           #4.#45         // javaBasic/Season.bbb:LjavaBasic/Season;
+  #12 = String             #20            // ccc
+  #13 = Fieldref           #4.#46         // javaBasic/Season.ccc:LjavaBasic/Season;
+  #14 = String             #21            // ddd
+  #15 = Fieldref           #4.#47         // javaBasic/Season.ddd:LjavaBasic/Season;
+  #16 = Class              #48            // java/lang/Enum
+  #17 = Utf8               aaa
+  #18 = Utf8               LjavaBasic/Season;
+  #19 = Utf8               bbb
+  #20 = Utf8               ccc
+  #21 = Utf8               ddd
+  #22 = Utf8               $VALUES
+  #23 = Utf8               [LjavaBasic/Season;
+  #24 = Utf8               values
+  #25 = Utf8               ()[LjavaBasic/Season;
+  #26 = Utf8               Code
+  #27 = Utf8               LineNumberTable
+  #28 = Utf8               valueOf
+  #29 = Utf8               (Ljava/lang/String;)LjavaBasic/Season;
+  #30 = Utf8               &lt;init&gt;
+  #31 = Utf8               (Ljava/lang/String;I)V
+  #32 = Utf8               Signature
+  #33 = Utf8               ()V
+  #34 = Utf8               &lt;clinit&gt;
+  #35 = Utf8               Ljava/lang/Enum&lt;LjavaBasic/Season;&gt;;
+  #36 = Utf8               SourceFile
+  #37 = Utf8               MyEnum.java
+  #38 = NameAndType        #22:#23        // $VALUES:[LjavaBasic/Season;
+  #39 = Class              #23            // &quot;[LjavaBasic/Season;&quot;
+  #40 = NameAndType        #49:#50        // clone:()Ljava/lang/Object;
+  #41 = Utf8               javaBasic/Season
+  #42 = NameAndType        #28:#51        // valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+  #43 = NameAndType        #30:#31        // &quot;&lt;init&gt;&quot;:(Ljava/lang/String;I)V
+  #44 = NameAndType        #17:#18        // aaa:LjavaBasic/Season;
+  #45 = NameAndType        #19:#18        // bbb:LjavaBasic/Season;
+  #46 = NameAndType        #20:#18        // ccc:LjavaBasic/Season;
+  #47 = NameAndType        #21:#18        // ddd:LjavaBasic/Season;
+  #48 = Utf8               java/lang/Enum
+  #49 = Utf8               clone
+  #50 = Utf8               ()Ljava/lang/Object;
+  #51 = Utf8               (Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+{
+  public static final javaBasic.Season aaa;
+    descriptor: LjavaBasic/Season;
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final javaBasic.Season bbb;
+    descriptor: LjavaBasic/Season;
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final javaBasic.Season ccc;
+    descriptor: LjavaBasic/Season;
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static final javaBasic.Season ddd;
+    descriptor: LjavaBasic/Season;
+    flags: ACC_PUBLIC, ACC_STATIC, ACC_FINAL, ACC_ENUM
+
+  public static javaBasic.Season[] values();
+    descriptor: ()[LjavaBasic/Season;
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=1, locals=0, args_size=0
+         0: getstatic     #1                  // Field $VALUES:[LjavaBasic/Season;
+         3: invokevirtual #2                  // Method &quot;[LjavaBasic/Season;&quot;.clone:()Ljava/lang/Object;
+         6: checkcast     #3                  // class &quot;[LjavaBasic/Season;&quot;
+         9: areturn
+      LineNumberTable:
+        line 9: 0
+
+  public static javaBasic.Season valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)LjavaBasic/Season;
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: ldc           #4                  // class javaBasic/Season
+         2: aload_0
+         3: invokestatic  #5                  // Method java/lang/Enum.valueOf:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;
+         6: checkcast     #4                  // class javaBasic/Season
+         9: areturn
+      LineNumberTable:
+        line 9: 0
+
+  static {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: new           #4                  // class javaBasic/Season
+         3: dup
+         4: ldc           #7                  // String aaa
+         6: iconst_0
+         7: invokespecial #8                  // Method &quot;&lt;init&gt;&quot;:(Ljava/lang/String;I)V
+        10: putstatic     #9                  // Field aaa:LjavaBasic/Season;
+        13: new           #4                  // class javaBasic/Season
+        16: dup
+        17: ldc           #10                 // String bbb
+        19: iconst_1
+        20: invokespecial #8                  // Method &quot;&lt;init&gt;&quot;:(Ljava/lang/String;I)V
+        23: putstatic     #11                 // Field bbb:LjavaBasic/Season;
+        26: new           #4                  // class javaBasic/Season
+        29: dup
+        30: ldc           #12                 // String ccc
+        32: iconst_2
+        33: invokespecial #8                  // Method &quot;&lt;init&gt;&quot;:(Ljava/lang/String;I)V
+        36: putstatic     #13                 // Field ccc:LjavaBasic/Season;
+        39: new           #4                  // class javaBasic/Season
+        42: dup
+        43: ldc           #14                 // String ddd
+        45: iconst_3
+        46: invokespecial #8                  // Method &quot;&lt;init&gt;&quot;:(Ljava/lang/String;I)V
+        49: putstatic     #15                 // Field ddd:LjavaBasic/Season;
+        52: iconst_4
+        53: anewarray     #4                  // class javaBasic/Season
+        56: dup
+        57: iconst_0
+        58: getstatic     #9                  // Field aaa:LjavaBasic/Season;
+        61: aastore
+        62: dup
+        63: iconst_1
+        64: getstatic     #11                 // Field bbb:LjavaBasic/Season;
+        67: aastore
+        68: dup
+        69: iconst_2
+        70: getstatic     #13                 // Field ccc:LjavaBasic/Season;
+        73: aastore
+        74: dup
+        75: iconst_3
+        76: getstatic     #15                 // Field ddd:LjavaBasic/Season;
+        79: aastore
+        80: putstatic     #1                  // Field $VALUES:[LjavaBasic/Season;
+        83: return
+      LineNumberTable:
+        line 10: 0
+        line 11: 13
+        line 12: 26
+        line 13: 39
+        line 9: 52
+}
+Signature: #35                          // Ljava/lang/Enum&lt;LjavaBasic/Season;&gt;;
+SourceFile: &quot;MyEnum.java&quot;
+</code></pre>
+<p>&#x5F97;&#x5230;&#x4EE5;&#x4E0B;&#x603B;&#x7ED3;&#xFF1A;</p>
+<ol>
+<li><p>&#x679A;&#x4E3E;&#x7C7B;Season&#x9ED8;&#x8BA4;&#x7EE7;&#x627F;&#x4E86;java.lang.Enum&#x7C7B;&#xFF0C;&#x5B57;&#x8282;&#x7801;&#x683C;&#x5F0F;&#x5E76;&#x6CA1;&#x6709;&#x7981;&#x6B62;&#x7EE7;&#x627F;java.lang.Enum&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x5199;&#x4EE3;&#x7801;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x53D1;&#x73B0;&#x4E0D;&#x80FD;extends java.lang.Enum&#x7C7B;&#xFF0C;&#x8BF4;&#x660E;&#x662F;&#x7F16;&#x8BD1;&#x5668;&#x4E0D;&#x5141;&#x8BB8;&#x7EE7;&#x627F;Enum&#x7C7B;&#x7684;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x81EA;&#x52A8;&#x5E2E;&#x6211;&#x4EEC;&#x7ED9;&#x679A;&#x4E3E;&#x7C7B;&#x7EE7;&#x627F;java.lang.Enum&#x7C7B;&#x3002;</p>
+</li>
+<li><p>&#x518D;&#x8BF4;&#x679A;&#x4E3E;&#x91CC;&#x9762;&#x7684;&#x503C;&#xFF0C;&#x5176;&#x5B9E;&#x679A;&#x4E3E;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x7C7B;&#xFF0C;&#x800C;&#x91CC;&#x9762;&#x7684;&#x503C;&#x5C31;&#x662F;&#x8FD9;&#x4E2A;&#x7C7B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x6BD4;&#x5982;&#x679A;&#x4E3E;&#x7C7B;Season&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x901A;&#x8FC7;Season.SPRING&#x62FF;&#x5230;&#x8FD9;&#x4E2A;&#x679A;&#x4E3E;&#x503C;&#xFF0C;&#x5E95;&#x5C42;&#x5B9E;&#x73B0;&#x5176;&#x5B9E;&#x5C31;&#x662F;Season&#x679A;&#x4E3E;&#x7C7B;&#x91CC;&#x9762;&#x6709;&#x56DB;&#x4E2A;static final&#x7684;Season&#x5BF9;&#x8C61;&#xFF08;&#x9759;&#x6001;&#x57DF;&#x5BF9;&#x8C61;&#xFF09;&#x3002;</p>
+</li>
+<li><p>&#x800C;&#x4E14;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8C03;&#x7528;values()&#x65B9;&#x6CD5;&#x5F97;&#x5230;&#x5B9A;&#x4E49;&#x7684;&#x679A;&#x4E3E;&#x91CF;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x90A3;&#x8FD9;&#x4E2A;values()&#x65B9;&#x6CD5;&#x53C8;&#x662F;&#x54EA;&#x6765;&#x7684;&#x5462;&#xFF1F;&#x6211;&#x4EEC;&#x5728;&#x679A;&#x4E3E;&#x7C7B;&#x4E2D;&#x5E76;&#x6CA1;&#x6709;&#x58F0;&#x660E;values()&#x65B9;&#x6CD5;&#xFF0C;&#x5176;&#x5B9E;&#x4E5F;&#x662F;&#x7F16;&#x8BD1;&#x5668;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684;&#xFF0C;&#x5B83;&#x4F1A;&#x8FD4;&#x56DE;&#x5E38;&#x91CF;&#x6C60;&#x4E2D;&#x7684;Season[]&#x53D8;&#x91CF;&#xFF0C;&#x800C;Season&#x53D8;&#x91CF;&#x5C31;&#x5B58;&#x50A8;&#x4E86;&#x6240;&#x6709;&#x7684;&#x679A;&#x4E3E;&#x503C;&#xFF1B;&#x90A3;&#x679A;&#x4E3E;&#x503C;&#x53C8;&#x662F;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x653E;&#x5230;Season[]&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x5462;&#xFF1F;&#x5176;&#x5B9E;&#x8FD9;&#x4E2A;&#x679A;&#x4E3E;&#x7C7B;&#x6709;&#x4E00;&#x5757;static&#x4EE3;&#x7801;&#x533A;&#x57DF;&#xFF08;&#x968F;&#x7740;&#x7C7B;&#x52A0;&#x8F7D;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x4F1A;&#x6267;&#x884C;&#xFF09;&#xFF0C;&#x5728;&#x8FD9;&#x5757;&#x533A;&#x57DF;&#x4E2D;&#x4F1A;&#x53D6;&#x679A;&#x4E3E;&#x7C7B;&#x7684;&#x6240;&#x6709;&#x9759;&#x6001;&#x57DF;&#xFF08;&#x4E5F;&#x5C31;&#x662F;SPRING, SUMMER...&#xFF09;&#x5BF9;&#x8C61;&#x653E;&#x5230;Season[]&#x6570;&#x7EC4;&#x4E2D;&#xFF0C;&#x5373;&#x5B8C;&#x6210;&#x4E86;&#x8FD9;&#x4E2A;&#x6570;&#x7EC4;&#x7684;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+</li>
+<li><p>&#x518D;&#x770B;Ordinal()&#x65B9;&#x6CD5;&#xFF0C;&#x56E0;&#x4E3A;&#x6BCF;&#x4E2A;&#x679A;&#x4E3E;&#x7C7B;&#x90FD;&#x4F1A;&#x81EA;&#x52A8;&#x7EE7;&#x627F;&#x81EA;java.lang.Enum&#x7C7B;&#xFF0C;Ordinal()&#x65B9;&#x6CD5;&#x662F;Enum&#x7C7B;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;&#x6BCF;&#x4E2A;&#x679A;&#x4E3E;&#x503C;&#x7684;&#x5E8F;&#x53F7;ordinal&#xFF0C;&#x5176;&#x5B9E;&#x6BCF;&#x4E00;&#x4E2A;&#x52A0;&#x5165;&#x5230;&#x679A;&#x4E3E;&#x7C7B;&#x4E2D;&#x503C;&#x90FD;&#x4F1A;&#x6709;name&#x548C;ordinal&#x5C5E;&#x6027;&#xFF08;&#x8FD9;&#x4E24;&#x4E2A;&#x5C5E;&#x6027;&#x5176;&#x5B9E;&#x662F;Enum&#x7C7B;&#x4E2D;&#x7684;&#xFF0C;&#x679A;&#x4E3E;&#x7C7B;&#x901A;&#x8FC7;&#x7EE7;&#x627F;Enum&#x7C7B;&#x5F97;&#x5230;&#x7684;&#xFF09;&#x3002;</p>
+</li>
+<li><p>&#x679A;&#x4E3E;&#x7C7B;&#x4E5F;&#x652F;&#x6301;&#x65B9;&#x6CD5;&#x7684;&#x91CD;&#x5199;&#xFF0C;&#x679A;&#x4E3E;&#x7C7B;&#x7684;&#x5B57;&#x8282;&#x7801;&#x4E5F;&#x662F;&#x666E;&#x901A;&#x7684;&#x7C7B;&#xFF0C;&#x4F46;&#x662F;&#x679A;&#x4E3E;&#x7C7B;&#x662F;&#x52A0;&#x4E86;final&#x4FEE;&#x9970;&#x7684;&#x3002;&#x679A;&#x4E3E;&#x7C7B;&#x4E2D;&#x7684;&#x679A;&#x4E3E;&#x503C;&#x5176;&#x5B9E;&#x662F;&#x679A;&#x4E3E;&#x7C7B;&#x7684;&#x5B50;&#x7C7B;&#xFF0C;&#x8FD9;&#x6837;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x679A;&#x4E3E;&#x503C;&#x8FD9;&#x4E2A;&#x7C7B;&#x4E2D;&#x91CD;&#x5199;&#x679A;&#x4E3E;&#x7C7B;&#x4E2D;&#x7684;&#x65B9;&#x6CD5;&#x4E86;&#x3002;&#x5176;&#x5B9E;&#x5728;&#x7F16;&#x8BD1;Season&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x628A;aaa, bbb...&#x8FD9;&#x4E9B;&#x7F16;&#x8BD1;&#x6210;Season&#x7684;&#x5185;&#x90E8;&#x7C7B;&#xFF0C;&#x8FD9;&#x4E9B;&#x5185;&#x90E8;&#x7C7B;extends&#x4E86;Season&#x7C7B;&#xFF0C;&#x5E76;&#x4E14;&#x91CD;&#x5199;&#x4E86;fun1()&#x65B9;&#x6CD5;&#x3002;</p>
+<pre><code class="lang-java"><span class="hljs-keyword">enum</span> Season{
+    aaa{
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fun1</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">return</span>;
+        }
+    },
+    bbb,
+    ccc,
+    ddd;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fun1</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span>;
+    }
+}
+</code></pre>
+</li>
+</ol>
+<footer class="page-footer"><span class="copyright">Copyright &#xA9; winterliu all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x7AE0;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2021-05-26 11:05:55
 </span></footer>
 <script>console.log("plugin-popup....");document.onclick = function(e){ e.target.tagName === "IMG" && window.open(e.target.src,e.target.src)}</script><style>img{cursor:pointer}</style>
                                 
@@ -1239,12 +1438,12 @@
 
             
                 
-                <a href="Java中的代理类Proxy和InvocationHandler.html" class="navigation navigation-prev " aria-label="Previous page: Java中的代理类Proxy和InvocationHandler">
+                <a href="Java数组底层实现原理.html" class="navigation navigation-prev " aria-label="Previous page: Java数组底层实现原理">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="Java中的泛型.html" class="navigation navigation-next " aria-label="Next page: Java中的泛型">
+                <a href="Java特性-封装继承多态.html" class="navigation navigation-next " aria-label="Next page: Java特性 封装继承多态">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1255,7 +1454,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Java中的反射","level":"1.8","depth":1,"next":{"title":"Java中的泛型","level":"1.9","depth":1,"path":"1-Java 基础/Java中的泛型.md","ref":"1-Java 基础/Java中的泛型.md","articles":[]},"previous":{"title":"Java中的代理类Proxy和InvocationHandler","level":"1.7","depth":1,"path":"1-Java 基础/Java中的代理类Proxy和InvocationHandler.md","ref":"1-Java 基础/Java中的代理类Proxy和InvocationHandler.md","articles":[]},"dir":"neutral"},"config":{"plugins":["back-to-top-button","code","splitter","-lunr","-search","search-pro","insert-logo","popup","-sharing","sharing-plus","chapter-fold","custom-favicon","pageview-count","tbfed-pagefooter","advanced-emoji","summary","toggle-chapters","theme-comscore"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy winterliu","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"summary":{},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"favicon.ico","theme-comscore":{},"back-to-top-button":{},"pageview-count":{},"custom-favicon":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"qq":true,"qzone":true,"weibo":true,"all":["douban","weibo","qq","qzone"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{},"insert-logo":{"style":"background: none; max-height: 50px; min-height: 50px;border-radius: 50%","url":"https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/avatar.JPG"}},"dependencies":{"gitbook-plugin-summary":"^1.1.0"},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"1-Java 基础/Java中的反射.md","mtime":"2021-06-09T09:47:49.424Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-13T12:08:22.493Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Java枚举底层实现","level":"1.16","depth":1,"next":{"title":"Java特性 封装继承多态","level":"1.17","depth":1,"path":"1-Java 基础/Java特性-封装继承多态.md","ref":"1-Java 基础/Java特性-封装继承多态.md","articles":[]},"previous":{"title":"Java数组底层实现原理","level":"1.15","depth":1,"path":"1-Java 基础/Java数组底层实现原理.md","ref":"1-Java 基础/Java数组底层实现原理.md","articles":[]},"dir":"ltr"},"config":{"plugins":["back-to-top-button","code","splitter","-lunr","-search","search-pro","insert-logo","popup","-sharing","sharing-plus","chapter-fold","custom-favicon","pageview-count","tbfed-pagefooter","advanced-emoji","summary","toggle-chapters","theme-comscore"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"Copyright &copy winterliu","modify_label":"该文章修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"chapter-fold":{},"summary":{},"splitter":{},"search-pro":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"popup":{},"code":{"copyButtons":true},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"favicon":"favicon.ico","theme-comscore":{},"back-to-top-button":{},"pageview-count":{},"custom-favicon":{},"advanced-emoji":{"embedEmojis":false},"sharing":{"douban":true,"qq":true,"qzone":true,"weibo":true,"all":["douban","weibo","qq","qzone"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"toggle-chapters":{},"insert-logo":{"style":"background: none; max-height: 50px; min-height: 50px;border-radius: 50%","url":"https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/avatar.JPG"}},"dependencies":{"gitbook-plugin-summary":"^1.1.0"},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"gitbook":"*"},"file":{"path":"1-Java 基础/Java枚举底层实现.md","mtime":"2021-05-26T03:05:55.802Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-13T12:08:22.493Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
