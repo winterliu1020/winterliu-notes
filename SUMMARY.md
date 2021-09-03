@@ -46,6 +46,14 @@
 - [10 30 DGA和DNS机器学习模型学习](13-研究生学习任务/2020-10-30-DGA和DNS机器学习模型学习.md)
 - [FTP协议](13-研究生学习任务/FTP协议.md)
 
+## Netty
+
+- [Channel](14-netty/channel.md)
+
+## Redis
+
+- [Redis的五种数据结构](15-redis/redis的五种数据结构.md)
+
 ## Java 并发
 
 - [ThreadLocal](2-Java 并发/1-ThreadLocal.md)
