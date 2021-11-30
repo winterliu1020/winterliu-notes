@@ -1,6 +1,6 @@
 之前一直没在代码中遇到过弱引用这一块，今天在看ThreadLocal类中的ThreadLocalMap的key时，发现这个key（也就是threadLocal）是一个弱引用，弱引用是不管内存空间足够与否，都会回收这部分空间。也就是为了防止内存泄漏，当一片空间仅仅由一个弱引用指向时，gc就会把这片空间回收。
 
-![image-20211028160800975](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211028160800975.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/image-20211028160800975.png)
 
 再来看看弱引用WeakReference类是怎么实现的呢？它不也就是一个类嘛，一个泛型类，这个类继承自Reference类，Reference类中的referent属性会被GC区别对待。。。
 

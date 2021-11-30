@@ -20,7 +20,7 @@ Java中对象头：
 
 以上轻量级锁加锁过程、轻量级锁转成重量级锁 参考：https://www.cnblogs.com/paddix/p/5405678.html
 
-![image-20211103175039544](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211103175039544.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/image-20211103175039544.png)
 
 轻量级锁时，一个线程在执行完同步代码块的时候，会用CAS将自己线程的栈帧中锁记录改回锁对象的Mark word，如果修改成功，说明还没有升级为重量级锁，改回之后，那么另外一个线程在不断重试CAS获取轻量级锁就可以成功拿到这个轻量级锁了，如果第二个线程在CAS循环结束之前还没有拿到轻量级锁，那这个锁对象的Mark word中的记录就会被修改为重量级锁 然后第二个线程被挂起，然后第一个线程执行完之后用CAS去将自己线程栈帧中的锁记录改回锁对象中Mark word时，会失败（因为锁对象的Mark word变成重量级锁了），这时第一个线程会释放锁，并且唤起被挂起的333445555555555w333ee3344线程。
 
