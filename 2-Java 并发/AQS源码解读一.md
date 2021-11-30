@@ -91,7 +91,7 @@ abstract static class Sync extends AbstractQueuedSynchronizer {
     }
 ```
 
-主要方法：nonfairTryAcquire()，可以看它说的，Sync这个类在trylock时用的是不公平锁，然后在ReentrantLock类中又有NotfairSync, FairSync两个类，这两个类对于release()方法不管你公平不公平，都是一样用的Sync继承来的方法，但是对于tryLock就不一样了。
+主要方法：nonfairTryAcquire()，可以看它说的，Sync这个类在trylock时用的是不公平锁，然后在ReentrantLock类中又有NonfairSync, FairSync两个类，这两个类对于release()方法不管你公平不公平，都是一样用的Sync继承来的方法，但是对于tryLock就不一样了。
 
 > Performs non-fair tryLock.  tryAcquire is implemented insubclasses, but both need nonfair try for trylock method.
 
@@ -240,7 +240,7 @@ public final void acquire(int arg) { // 此时arg == 1
 // 这里插入一个细节：这是在ReentrantLock类中调用的tryAcquire()方法，其实AQS类里面也有tryAcquire()方法，但是我们知道ReentrantLock类重写了tryAcquire()方法，所以这里调用的是ReentrantLock类中的tryAcquire()方法。
 
 //--------------------------------------------------------------------------------
-// 我们来看一下ReentrantLock类中的tryAcquire()方法：
+// 我们来看一下ReentrantLock类中FairSync这个内部类的tryAcquire()方法：
 protected final boolean tryAcquire(int acquires) {
     final Thread current = Thread.currentThread();
     int c = getState();
@@ -659,5 +659,5 @@ private Node enq(final Node node) {
 
 这里可以简单说下 waitStatus 中 SIGNAL(-1) 状态的意思，**Doug Lea 注释的是：代表后继节点需要被唤醒。也就是说这个 waitStatus 其实代表的不是自己的状态，而是后继节点的状态，我们知道，每个 node 在入队的时候，都会把前驱节点的状态改为 SIGNAL，然后阻塞，等待被前驱唤醒。**这里涉及的是两个问题：有线程取消了排队、唤醒操作。其实本质是一样的，可以顺着 “waitStatus代表后继节点的状态” 这种思路去看一遍源码。
 
-![](https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/concurrent/20210407145510.png)
+![](/Users/liuwentao/Desktop/20210407145510.png)
 

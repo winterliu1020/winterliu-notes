@@ -1,0 +1,30 @@
+Doug Lea在JDK1.5的时候写了整个JUC包，这是一个并发库。那我们从直观上看，这个并发库里应该有什么东西呢？他应该提供哪几块类来让我们有更好的并发体验呢？
+
+一、线程互斥
+
+首先，我觉得并发的核心是一个标记flag，而这个标记在JUC下就是locks，也就是各种锁的实现类，而这还不够深刻，到底这个标记是什么呢？每个线程在并发的时候，如果都想对共享资源进行读或者写，那来一个线程，这个线程就会去看一下这个标记，这个线程就可以通过这个标记知道共享资源是不是正在被别的线程占有，如果被别的线程占有，那就涉及到后面的（同步队列、线程的唤醒调度），这里只谈标记，其实标记在JUC下的各种锁中本质就是AQS这个框架中的state属性，它被volatile修饰，保证在多线程中的内存可见性，（当然synchronized关键字也有标记，虽然它是由JVM来提供，它的标记其实是C++层面MonitorObject对象中的 _owner和recursion， _owner表示当前占有共享资源的线程，recursion来记录这个占有资源的线程重入的次数（可重入锁也叫递归锁））。
+
+那JUC下有哪些locks呢？可以看到JUC包下面还有一个locks包，里面有一个lock接口，为什么有了synchronized后Doug Lea还要自己实现一套锁机制呢？在lock接口中可以看到有tryLock(), lockInterruptly(), tryLock(time)这几个方法，然后让lock的实现子类去实现，所以我们知道lock接口相比于synchronized关键字提供的锁，多了一些方法，更加灵活。
+
+那lock有哪些子类呢？可重入、不可重入，读写锁，独占、共享锁；这些其实是锁的策略，而真正在JUC包下的锁的实现子类中，一个锁实现可以同时包含几种策略，比如ReentrantLock是可重入、独占锁；而ReentrantReadWriteLock是可重入、即可独占又可共享；
+
+二、同步队列
+
+OK，现在多个线程打到一个flag上，如果是独占锁，那肯定只有一个线程可以获取到锁，其它线程没抢过怎么办呢？其实剩余的这些线程就需要放到一个队列中，Doug Lea给我写好了BlockingQueue，一个阻塞队列，也叫同步队列，它有几种实现子类，比如ArrayBlockingQueue, LinkedBlockingQueue；阻塞队列相比于普通队列多了阻塞的作用，比如当take取元素时，如果队列是空的，那执行take函数的线程会被阻塞，当put放元素的时候，如果队列已经满了，执行put函数的线程也会被阻塞；具体同步队列的实现类不同，比如ArrayBlockingQueue内部数据结构是用AQS的一个阻塞队列和AQS中声明两个condition；
+
+三、线程池
+
+并发的本质虽然看上去是多个线程在并发，但是再往下看，其实是多个任务同时在执行，任务跑在线程上，任务是非常多的，那为了复用这些线程，Doug Lea又为我们写了Executor框架，也就是多种线程池；
+
+四、线程同步工具
+
+当然我们平常也不是任何东西都要用锁，比如有些场景需要用类似倒计时的东西、需要用限制同一个时刻允许在运行的线程数，类似于这些场景，Doug Lea给我们写了CountDownLatch, Semaphore两个同步工具，仔细看这两个实现类，底层其实还是用的AQS类，这两个类和ReentrantLock锁也类似，都是写了一个内部类Sync继承自AQS作为同步器，这两个类主要用到AQS中state，在CountDownLatch用state作为倒计时的初始值,在 Semaphore中用state作为声明许可证的个数。然后在不同的实现类中去重写AQS框架提供给实现类的自定义实现方法，比如tryAcquire(), tryRelease()，当然在CountDownLatch, Semaphore这两个类中因为都是共享策略，也就是说它允许多个线程同时去修改state值，所以是对tryAcquireShared(), tryReleaseShared()自定义实现。
+
+五、同步的容器类
+
+Doug Lea给我们写了ConcurrentHashMap几个保证同步的容器类。
+
+
+
+
+

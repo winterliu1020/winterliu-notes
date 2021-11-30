@@ -20,6 +20,7 @@
 - [Java虚拟机内存区域](1-Java 基础/Java虚拟机内存区域.md)
 - [垃圾收集器与内存分配策略](1-Java 基础/垃圾收集器与内存分配策略.md)
 - [对Java中Class类理解](1-Java 基础/对Java中Class类理解.md)
+- [对Java中弱引用、强引用的理解](1-Java 基础/对Java中弱引用、强引用的理解.md)
 
 ## 安全
 
@@ -69,11 +70,25 @@
 - [AQS源码解读二](2-Java 并发/AQS源码解读二.md)
 - [Java中Thread类的中断状态](2-Java 并发/Java中Thread类的中断状态.md)
 - [Java中Thread类的基本方法及六种线程状态](2-Java 并发/Java中Thread类的基本方法及六种线程状态.md)
+- [Java并发中一些零散知识](2-Java 并发/Java并发中一些零散知识.md)
 - [Java线程上下文切换](2-Java 并发/Java线程上下文切换.md)
 - [Java线程中的Wait、Notify、中断等知识](2-Java 并发/Java线程中的wait、notify、中断等知识.md)
 - [Java锁池和等待池](2-Java 并发/Java锁池和等待池.md)
 - [Synchronized和无锁，偏向锁，轻量级锁，重量级锁的关系](2-Java 并发/synchronized和无锁，偏向锁，轻量级锁，重量级锁的关系.md)
+- [对CountDownLatch的理解](2-Java 并发/对CountDownLatch的理解.md)
+- [对CyclicBarrier的理解](2-Java 并发/对CyclicBarrier的理解.md)
+- [对JUC下BlockingQueue的深入理解](2-Java 并发/对JUC下BlockingQueue的深入理解.md)
+- [对JUC中的Locks体系的深入理解](2-Java 并发/对JUC中的Locks体系的深入理解.md)
+- [对JUC的深入理解](2-Java 并发/对JUC的深入理解.md)
+- [对Java中Executor框架的深入理解](2-Java 并发/对Java中Executor框架的深入理解.md)
+- [对Java中Thread线程类及线程的理解](2-Java 并发/对Java中Thread线程类及线程的理解.md)
+- [对Java中并发理论的深入理解](2-Java 并发/对Java中并发理论的深入理解.md)
+- [对ReentrantLock和AQS的深入理解](2-Java 并发/对ReentrantLock和AQS的深入理解.md)
+- [对ThreadLocal的深入理解](2-Java 并发/对ThreadLocal的深入理解.md)
+- [对Semaphore的理解](2-Java 并发/对semaphore的理解.md)
+- [对Synchronized关键字的深入理解](2-Java 并发/对synchronized关键字的深入理解.md)
 - [悲观锁、乐观锁、可重入锁、读写锁](2-Java 并发/悲观锁、乐观锁、可重入锁、读写锁.md)
+- [深入理解Atomic](2-Java 并发/深入理解Atomic.md)
 
 ## Java虚拟机
 
@@ -96,7 +111,9 @@
 
 ## Compute Network
 
+- [对Http1.0,1.1,2.0的理解](5-Compute-Network/对http1.0,1.1,2.0的理解.md)
 - [计算机网络介绍](5-Compute-Network/计算机网络介绍.md)
+- [遇到的一些Http响应码](5-Compute-Network/遇到的一些http响应码.md)
 
 ## Mysql数据库
 
@@ -116,3 +133,8 @@
 - [队列](8-数据结构和算法之美/队列.md)
 
 ## 操作系统
+
+
+## 设计模式
+
+- [模版方法模式](设计模式/模版方法模式.md)
