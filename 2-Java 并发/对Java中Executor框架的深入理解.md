@@ -60,7 +60,7 @@ ScheduledExecutorService也是一个接口，为什么需要创建这样一个�
 
 再看下这个队列怎么把任务加入：
 
-![image-20211022174907979](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211022174907979.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130174534.png)
 
 可以看到用到了ReentrantLock保证入队的同步，再看下任务出队：
 
@@ -92,11 +92,11 @@ ScheduledExecutorService也是一个接口，为什么需要创建这样一个�
 
 可以看到线程池状态为Running的时候，是用-1代表的，shutdown是0，所以如果有任务提交到线程池执行的时候，需要先检查一下当前线程池状态，是ctl是-1的时候才能提交。
 
-![image-20211026155025187](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211026155025187.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130174708.png)
 
 
 
-![image-20211026161844030](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211026161844030.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130174735.png)
 
 重点看上图的run()方法，可以看到doug lea抽象出了一个worker，worker是runnable的子类，同时有一个thread属性，然后重写了父类Runnable的run方法。Worker中还有一部分是AQS的方法，看注释可以知道它实现了一个简易的锁，因为worker里面有thread，需要对这个线程的执行权加锁，这里用AQS实现了一个独占锁，而不是拿ReentrantLock这个可重入锁。
 
@@ -104,9 +104,9 @@ ScheduledExecutorService也是一个接口，为什么需要创建这样一个�
 
 上面介绍了一下Worker这个内部类，要知道我们不管是threadPoolExecutor.execute()还是threadPoolExecutor.submit()，最终都会调用execute()方法，
 
-![image-20211026163550388](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211026163550388.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130174823.png)
 
-![image-20211026165641947](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211026165641947.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130174854.png)
 
 上面最后一行应该是如果任务队列满了，会尝试直接addWorker(command, false)，表示创建非核心线程。
 
@@ -114,7 +114,7 @@ ScheduledExecutorService也是一个接口，为什么需要创建这样一个�
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211026174214.png)
 
-![image-20211026174921509](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211026174921509.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130174922.png)
 
 addWorker()中执行t.start()会发生什么呢？如下图，其实就是调用worker中的run()方法
 
@@ -132,7 +132,7 @@ addWorker()中执行t.start()会发生什么呢？如下图，其实就是调用
 
 具体看：https://javadoop.com/post/java-thread-pool
 
-![image-20211026192958139](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211026192958139.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130174952.png)
 
 对于线程池中线程的回收：
 

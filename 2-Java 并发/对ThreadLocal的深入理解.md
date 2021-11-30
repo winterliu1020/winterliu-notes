@@ -54,7 +54,7 @@ public class ThreadLocalPractice {
 
 InheritableThreadLocal类，只是重写了createMap和getMap方法，让这两个方法返回的是当前线程中的inheritableThreadLocals变量：
 
-![image-20211028113353450](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211028113353450.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/image-20211028113353450.png)
 
 
 
@@ -62,7 +62,7 @@ InheritableThreadLocal类，只是重写了createMap和getMap方法，让这两�
 
 ThreadLocalMap是ThreadLocal类中一个静态内部类：
 
-![image-20211027172928614](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211027172928614.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/image-20211027172928614.png)
 
 
 
@@ -74,7 +74,7 @@ threadLocal在主线程和子线程的关系：
 
 可以看到threadLocalMap的构造是懒加载，如果在线程中没有执行put，或者get,这个线程中的threadLocalMap是一直为null的，当你执行某个threadLocal对象的put或者get方法的时候，它才会去找一下这个线程的threadLocalMap对象中有没有这个threadLocal对象的key，在这个线程第一次访问threadLocal对象的时候才会创建threadLocalMap对象。
 
-![image-20211028105628376](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211028105628376.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/image-20211028105628376.png)
 
 我们再来看看ThreadLocal类的get, set, remove等方法：
 

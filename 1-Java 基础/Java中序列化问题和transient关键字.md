@@ -58,7 +58,7 @@ writeObject:
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/Java%20%E5%9F%BA%E7%A1%80/20201203160031.png)
 
-![image-20201203160106853](/Users/liuwentao/Library/Application Support/typora-user-images/image-20201203160106853.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130175046.png)
 
 readObject:
 

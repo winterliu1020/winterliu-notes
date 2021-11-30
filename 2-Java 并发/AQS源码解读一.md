@@ -659,5 +659,5 @@ private Node enq(final Node node) {
 
 这里可以简单说下 waitStatus 中 SIGNAL(-1) 状态的意思，**Doug Lea 注释的是：代表后继节点需要被唤醒。也就是说这个 waitStatus 其实代表的不是自己的状态，而是后继节点的状态，我们知道，每个 node 在入队的时候，都会把前驱节点的状态改为 SIGNAL，然后阻塞，等待被前驱唤醒。**这里涉及的是两个问题：有线程取消了排队、唤醒操作。其实本质是一样的，可以顺着 “waitStatus代表后继节点的状态” 这种思路去看一遍源码。
 
-![](/Users/liuwentao/Desktop/20210407145510.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20210407145510.png)
 
