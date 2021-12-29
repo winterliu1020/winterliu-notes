@@ -58,6 +58,9 @@ put函数的大致思路是：
 6. 如果bucket满了，就resize.  
 
 具体代码如下：
+
+可以看到比较的过程是：首先hash值一定得相同，然后如果**key的地址相同**或者**key代表的值相同（也就是用equals函数比较）**
+
 ```java
 public V put(K key, V value){
     // 对key的hashCode()做hash
@@ -152,8 +155,9 @@ static final int hash(Object key) {
     return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
 }
 ```
-计算hash值其实就是：高16bit不变，底16bit和高16bit做了一个异或。  
+**计算hash值其实就是：高16bit不变，底16bit和高16bit做了一个异或**。  
 在设计hash函数时，因为table长度n为2的幂，而计算下标时，是使用&位操作(按位与操作)，而非%求余。
+
 > (n-1) & hash
 
 设计者认为这方法很容易发生碰撞，比如在n-1为15(0x1111)，其实散列真正生效的只是低4bit，因为除了低4bit其它的位都是0，通过按位与操作之后也都是0，所以当然容易碰撞了。  

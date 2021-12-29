@@ -32,6 +32,8 @@ cp -r /etc/ /tmp #将etc这个目录下所有内容复制到/tmp目录下面，�
 
 压缩、解压缩：
 
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211223113124.png)
+
 ```shell
 # zip、unzip
 zip test.zip test.txt # 讲test.txt压缩成test.zip
@@ -169,4 +171,8 @@ kill -9 PID # 杀掉进程
 # lsof命令 list open files 列出当前系统打开文件的工具
 lsof -i:端口号 # 这个命令得root用户才能执行
 ```
+
+### Linux权限命令
+
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211223114047.png)
 

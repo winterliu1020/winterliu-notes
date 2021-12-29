@@ -1,10 +1,14 @@
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/Java 基础/20201029172012.png)
 
+
+
+
+
 ### 1. Map.Entry<K, V>是Map声明的一个内部接口，这个接口是泛型接口，定义为Entry<K, V>。它表示Map中的一个实体（也就是一个key-value对)。
 
 **Java1.8中HashMap**：可以看到1.8中里面的节点叫做Node，这个Node是一个内部类，它实现了Map.Entry<K, V>这个接口。因为1.8开始，当发生哈希冲突时，新放进来的节点会放到Node<K, V>[] tab这个数组的节点下面的链表上，如果链表长度过长，则会转化成红黑树。（这里的   Node<K, V>   是一个泛型类）。
 
-> ### java发射机制中，class<T>是什么意思？
+> ### java反射机制中，class<T>是什么意思？
 >
 > Class<Integer> cla;与Class<?> cl;
 > 前一个表示cla只能指向Integer这种类型，而后一个cl表示可以指向任意类型。
@@ -71,7 +75,7 @@
 
 ### 2. 一些总结
 
-对于最上面那张容器类图，第一层是Iterator, Collection, Map三个接口，接口就是一种规范，它更加抽象，抽象类抽象程度次之，普通类抽象程度最低。也就是这三个接口最为Java容器中最抽象的东西，其实就是最顶层的规范，接口当中一般是一些方法的声明，变量（属性）按照接口的设计原则来说不应该放到接口当中的。
+对于最上面那张容器类图，第一层是Iterator, Collection, Map三个接口，接口就是一种规范，它更加抽象，抽象类抽象程度次之，普通类抽象程度最低。也就是这三个接口是Java容器中最抽象的东西，其实就是最顶层的规范，接口当中一般是一些方法的声明，变量（属性）按照接口的设计原则来说不应该放到接口当中的。
 
 然后第二层是（List, Set, Queue还是三个接口） AbstractList, AbstractSet, AbstractMap, SortedMap这几个抽象类，在抽象类中已经把第一层对应的接口中定义的方法实现了（不单单是声明了），然后再到第三层的HashSet, ArrayList, HashMap, LinkedHashMap, TreeMap这几个普通的类，把具体的某几个特有的方法分别实现了，也就是抽象程度没有那么高了。
 
@@ -94,6 +98,8 @@ queue.peek(); // 这里其实调用的是LinkedList类中的peek()方法
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/Java 基础/20201029230148.png)
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/Java 基础/20201029230959.png)
+
+
 
 ### 3.HashMap和LinkedHashMap
 

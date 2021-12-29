@@ -11,9 +11,13 @@
 
 **惰性释放** 如果修改后减少了存储的内容，多出来的那些空间不会立即释放。
 
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211228145806.png)
+
 ### 2 双向链表
 
 统筹：head, tail, len  实施：node[pre, next]
+
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211228145938.png)
 
 ### 3 ziplist
 
@@ -27,7 +31,23 @@
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/winterliu-notes/concurrent/20210908144823.png)
 
-### 4 zset
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211228150857.png)
+
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211228150917.png)
+
+通过统筹部分的尾指针找到最后一个节点，然后从后往前遍历
+
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211228151041.png)
+
+要么一个字节、要么五个字节，根据前一节点的长度。。
+
+### 4 Hash
+
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211228151549.png)
+
+
+
+### 5 zset
 
 有序集合。里面的每一个元素都包括[score和member]
 

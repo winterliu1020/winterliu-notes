@@ -1,6 +1,6 @@
 下面会介绍Java中的代理类Proxy和代理类中需要传递的参数InvocationHandler类。
 
-Proxy类是所有生成的代理类的父类，**为什么生成的代理类需要去继承Proxy类呢**？因为代理类中没有InvocationHandler属性啊，没有这个属性我怎么实现后面的：在代理类重新生成的接口中的方法中调用this.h.invoke(this, m3, null)，this表示生成的代理类，h表示这个代理类的InvocationHandler对象；这样就会让代理类调用接口中的方法时都会走handler类中的invoke()方法，你再去在invoke()方法中实现方法调用的增强和约束。
+Proxy类是所有生成的代理类的父类，**为什么生成的代理类需要去继承Proxy类呢**？因为代理类中没有InvocationHandler属性啊，没有这个属性我怎么实现后面的：在代理类重新生成的接口中的方法中调用this.h.invoke(this, m3, null)，this表示生成的代理类，h表示这个代理类的InvocationHandler对象；这样就会让代理类调用接口中的方法时都会走handler类中的invoke()方法，你再去**在invoke()方法中实现方法调用的增强和约束**。
 
 代理类还会“实现”你定义的接口，因为我们想让代理类执行方法和被代理类执行方法对于用户来说是无感知的，比如你用代理类实例调用添加学生方法studentProxy.addStudent()，它和被代理类实例studentImpl.addStudent()是一样的，因为代理类和student类都实现了**同一个Student接口。** 这样我就可以通过 Student studentProxy = Proxy.newInstance(studentImpl.getClass().getClassLoader, studentImpl.getClass().getInterfaces(), studentInvocationHandler);拿到代理类。
 
