@@ -127,7 +127,9 @@ ssl分为两层：
 
 ### TLS第四阶段 完成握手协议、建立SSL连接
 
-![image-20211215114416275](/Users/liuwentao/Library/Application Support/typora-user-images/image-20211215114416275.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211229233911.png)
+
+
 
 
 
