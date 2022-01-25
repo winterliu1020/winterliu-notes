@@ -55,6 +55,8 @@
 ## Netty
 
 - [Channel](14-netty/channel.md)
+- [Netty结构设计](14-netty/netty结构设计.md)
+- [五种Io模型](14-netty/五种io模型.md)
 
 ## Redis
 

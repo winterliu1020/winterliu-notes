@@ -8,7 +8,13 @@
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211215170853.png)
 
+### 再看看TCP为什么可靠啊？相比于UDP
 
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20220102154515.png)
+
+
+
+### 开始三次握手
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211215172154.png)
 

@@ -2,7 +2,7 @@
 
 1 字符串Simple Dynamic String
 
-统筹：len, free, but-->['a', 'b', 'c'...] 字符数组
+统筹：len, free, buf-->['a', 'b', 'c'...] 字符数组
 
 **空间预分配** 每次修改之后如果长度变大了（修改之前的长度是len）：
 
