@@ -173,6 +173,10 @@ ssl分为两层：
 
 
 
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20220315151503.png)
+
+
+
 参考：
 
 https://www.biaodianfu.com/https-ssl-tls.html

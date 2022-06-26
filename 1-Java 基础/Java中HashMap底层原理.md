@@ -42,6 +42,7 @@ for(Entry<String, Integer> entry : map.entrySet()){
 注意点：基于Map接口实现、允许null键/值、非同步、不保证有序(比如插入的循序)、不保证序列不随时间变化。
 
 ### 2. 两个重要参数
+
 HashMap中需要注意两个重要的参数是：容量(Capacity)和负载因子(Load factor)  
 > - Initial capacity The capacity is the number of buckets in the hash table, The initial capacity is simply the capacity at the time the hash table is created.  
 > - Load factor The load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased. 
@@ -49,6 +50,7 @@ HashMap中需要注意两个重要的参数是：容量(Capacity)和负载因子
 Capacity其实就是buckets的数目，Load factor就是buckets填满程度的最大比例。当HashMap中元素的个数大于capacity*load factor时就需要调整buckets的数目为当前的2倍。  
 
 ### 3. put函数的实现
+
 put函数的大致思路是：
 1. 利用hashCode()函数得到key的hash值，然后再计算这个hash值的index；
 2. 如果没有碰撞就直接放在bucket中；

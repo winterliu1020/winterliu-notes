@@ -24,7 +24,7 @@ Executor框架提供管理终止的方法和产生一个Future来跟踪一个或
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211020163524.png)
 
-不管你传一个单独的callable，或者runnable+result，都会用newTaskFor转成一个RunnableFuture对象，RunnableFuture对象中放的是一个Callable对象，runnableFuture类重写的run方法中执行的是callable.call()方法，然后把执行结果放到RunnableFuture的output属性，然后submit()方法返回就是这个RunnableFuture对象，这样你就可以用future.get()获取到你跑的代码的结果，这个结果就是output的值了，注意callable.call()方法会捕获异常，所以如果执行callable.call()时发生异常，这个output就是捕获到的那个异常的结果了。
+不管你传一个单独的callable，或者runnable+result，都会用newTaskFor转成一个RunnableFuture对象，RunnableFuture对象中放的是一个Callable对象，**runnableFuture类重写的run方法中执行的是callable.call()方法**，然后把执行结果放到RunnableFuture的output属性，然后submit()方法返回就是这个RunnableFuture对象，这样你就可以用future.get()获取到你跑的代码的结果，这个结果就是output的值了，注意callable.call()方法会捕获异常，所以如果执行callable.call()时发生异常，这个output就是捕获到的那个异常的结果了。
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211026111155.png)
 
