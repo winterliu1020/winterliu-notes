@@ -131,6 +131,8 @@ ssl分为两层：
 
 
 
+
+
 ### 总结一下握手
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211215160606.png)
@@ -168,6 +170,10 @@ ssl分为两层：
 主要负责消息的压缩，加密，数据的认证
 
 ![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211214180741.png)
+
+
+
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20220315151503.png)
 
 
 

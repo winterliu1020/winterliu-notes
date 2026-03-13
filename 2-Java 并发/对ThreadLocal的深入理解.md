@@ -54,7 +54,7 @@ public class ThreadLocalPractice {
 
 InheritableThreadLocal类，只是重写了createMap和getMap方法，让这两个方法返回的是当前线程中的inheritableThreadLocals变量：
 
-![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130175116.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/image-20211028113353450.png)
 
 
 
@@ -62,7 +62,7 @@ InheritableThreadLocal类，只是重写了createMap和getMap方法，让这两�
 
 ThreadLocalMap是ThreadLocal类中一个静态内部类：
 
-![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/20211130175138.png)
+![](https://winterliublog.oss-cn-beijing.aliyuncs.com/notes/image-20211027172928614.png)
 
 
 
